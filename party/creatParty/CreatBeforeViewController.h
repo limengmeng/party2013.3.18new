@@ -27,8 +27,12 @@
     
     float lat;
     float lng;
-    
+    NSString *c_id;
+    NSString *c_title;
 }
+@property (nonatomic,retain) NSString *c_id;
+@property (nonatomic,retain) NSString *c_title;
+
 @property  float lat;
 @property  float lng;
 

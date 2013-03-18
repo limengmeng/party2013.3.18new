@@ -338,7 +338,7 @@ NSInteger prerow=-1;
     }
     else if(indexPath.section==1){
         dic=[sinaList objectAtIndex:row];
-        NSLog(@"新浪互粉=============%@",sinaList);
+        //NSLog(@"新浪互粉=============%@",sinaList);
     }
     else if(indexPath.section==2){
         dic=[self.playList objectAtIndex:row];
@@ -445,11 +445,8 @@ NSInteger prerow=-1;
     
     // Set cell checkmark
     NSNumber *checked = [stateDictionary objectForKey:key];
-    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
     if (!checked) [stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
-    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
     cell.accessoryType = checked.boolValue ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
-    NSLog(@"checked.boolValue====%c,self.stateDictionary=====%@",checked.boolValue,stateDictionary);
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -476,30 +473,31 @@ NSInteger prerow=-1;
 	// Created an inverted value and store it
 	BOOL isChecked = !([[stateDictionary objectForKey:key] boolValue]);
     
-    NSLog(@"isChecked====%c,self.stateDictionary=====%@",isChecked,stateDictionary);
     
 	NSNumber *checked = [NSNumber numberWithBool:isChecked];
     
-    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
     
 	[stateDictionary setObject:checked forKey:key];
 	
-    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
     
 	// Update the cell accessory checkmark
 	newcell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
     
-    NSLog(@"isChecked====%d,self.stateDictionary=====%@",isChecked,stateDictionary);
     
     //******************************查看好友详细信息************************************
     if (spot==3) {
-        newcell.accessoryType=UITableViewCellAccessoryNone;
-        self.hidesBottomBarWhenPushed=YES;
-        infoViewController *info=[[infoViewController alloc]init];
-        info.user_id=[[self.list objectAtIndex:indexPath.row] objectForKey:@"USER_ID"];
-        [self.navigationController pushViewController:info animated:YES];
-        self.hidesBottomBarWhenPushed=NO;
-        [info release];
+        if(indexPath.section!=1){
+            newcell.accessoryType=UITableViewCellAccessoryNone;
+            self.hidesBottomBarWhenPushed=YES;
+            infoViewController *info=[[infoViewController alloc]init];
+            info.user_id=[[self.list objectAtIndex:indexPath.row] objectForKey:@"USER_ID"];
+            [self.navigationController pushViewController:info animated:YES];
+            self.hidesBottomBarWhenPushed=NO;
+            [info release];
+        }
+        else{
+            newcell.accessoryType=UITableViewCellAccessoryNone;
+        }
     }
     //******************************查看好友详细信息 end************************************
     else{
@@ -565,8 +563,6 @@ NSInteger prerow=-1;
         }
     }
     
-
-    
     NSLog(@"self.choiceFriends=======%@",choiceFriends);
     NSLog(@"self.choiceFriends=======%@",sinaFriends);
     
@@ -627,7 +623,11 @@ NSInteger prerow=-1;
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tv editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.spot==3) {
-        return UITableViewCellEditingStyleDelete;
+        if(indexPath.section!=1)
+            return UITableViewCellEditingStyleDelete;
+        else{
+            return UITableViewCellAccessoryNone;
+        }
     }else
         return UITableViewCellEditingStyleNone;
 	//不能是UITableViewCellEditingStyleNone

@@ -31,7 +31,12 @@
     NSString *type;
     
     int map_Temp;
+    
+    NSString *c_id;
+    NSString *c_title;
 }
+@property (nonatomic,retain) NSString *c_id;
+@property (nonatomic,retain) NSString *c_title;
 @property int map_Temp;
 @property (strong,nonatomic) NSString *type;
 @property (strong,nonatomic) NSMutableString* city;

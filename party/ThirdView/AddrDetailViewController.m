@@ -9,9 +9,11 @@
 #import "AddrDetailViewController.h"
 #import "ASIFormDataRequest.h"
 #import "SDImageView+SDWebCache.h"
+#import "MapViewController.h"
 
-
-@interface AddrDetailViewController ()
+@interface AddrDetailViewController (){
+    MapViewController *mapControl;
+}
 
 @end
 
@@ -461,16 +463,27 @@
 {
     btB.selected=!btB.selected;
     //*******************************创建 party********************************
-    NSLog(@"C_title:%@",C_title);
-    NSLog(@"C_id:%@",self.C_id);
-    creatParty=[[CreatPartyViewController alloc]init];
-    creatParty.title=@"创建party";
-    creatParty.from_C_title=C_title;
-    creatParty.from_C_id=C_id;
-    creatParty.from_P_type=@"3";
-    self.hidesBottomBarWhenPushed=YES;
-    [self.navigationController pushViewController:creatParty animated:YES];
+//    NSLog(@"C_title:%@",C_title);
+//    NSLog(@"C_id:%@",self.C_id);
+//    creatParty=[[CreatPartyViewController alloc]init];
+//    creatParty.title=@"创建party";
+//    creatParty.from_C_title=C_title;
+//    creatParty.from_C_id=C_id;
+//    creatParty.from_P_type=@"3";
+//    self.hidesBottomBarWhenPushed=YES;
+//    [self.navigationController pushViewController:creatParty animated:YES];
+    
+    NSLog(@"跳到地图");
+    mapControl=[[MapViewController alloc]init];
+    mapControl.title=@"创建派对地点";
+    mapControl.type=@"1";
+    mapControl.map_Temp=1;
+    mapControl.c_id=self.C_id;
+    mapControl.c_title=self.C_title;
+    [self.navigationController pushViewController:mapControl animated:YES];
+    [mapControl release];
     //*******************************创建 party end********************************
+   
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -37,6 +37,7 @@
 
     UIButton *joinParty;
 }
+
 @property (strong,nonatomic) NSString* C_title;
 @property (strong,nonatomic) NSDictionary* dict;
 @property (nonatomic,retain) NSString *userUUid;

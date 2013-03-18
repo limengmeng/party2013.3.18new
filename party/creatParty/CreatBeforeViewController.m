@@ -20,6 +20,8 @@
 @synthesize local;
 @synthesize lat;
 @synthesize lng;
+@synthesize c_id;
+@synthesize c_title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,6 +89,10 @@
     name.textColor=[UIColor lightGrayColor];
     [name becomeFirstResponder];
     name.delegate=self;
+    NSLog(@"%@",self.c_title);
+    if (![self.c_title isEqualToString:@"(null)"]) {
+        name.text=self.c_title;
+    }
     [name addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:name];
     
@@ -271,29 +277,6 @@
 - (void) textFieldDidChange:(id) sender {
     UITextField *_field = (UITextField *)sender;
     NSLog(@"%@",[_field text]);
-    [self save];
-}
-
-#pragma mark -save and read
-
--(void)read{
-    NSArray *path=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir=[path objectAtIndex:0];
-    //NSFileManager *fm=[NSFileManager defaultManager];
-    NSString *imagePath=[docDir stringByAppendingPathComponent:@"creatBefore.txt"];
-    NSMutableArray *stringmutable=[NSMutableArray arrayWithContentsOfFile:imagePath];
-    name.text=[stringmutable objectAtIndex:0];
-    phone.text=[stringmutable objectAtIndex:1];
-}
-
--(void)save{
-    //=========数据持久化=============================================
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //NSLog(@"Get document path: %@",[paths objectAtIndex:0]);
-    NSString *fileName=[[paths objectAtIndex:0] stringByAppendingPathComponent:@"creatBefore.txt"];
-    NSMutableArray *uuidMutablearray=[NSMutableArray arrayWithObjects:name.text,phone.text, nil];
-    //NSLog(@"sadafdasfas%@",uuidMutablearray);
-    [uuidMutablearray writeToFile:fileName atomically:YES];
 }
 
 #pragma mark -others
@@ -304,6 +287,8 @@
     [local release];
     [friendList release];
     [type release];
+    [c_id release];
+    [c_title release];
 }
 
 - (void)didReceiveMemoryWarning

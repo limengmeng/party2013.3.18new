@@ -10,10 +10,12 @@
 #import "SDImageView+SDWebCache.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-
+#import "MapViewController.h"
 static NSString* P_type=@"activity";
 
-@interface DetailViewController ()
+@interface DetailViewController (){
+    MapViewController *mapControl;
+}
 
 @end
 
@@ -268,12 +270,24 @@ static NSString* P_type=@"activity";
     NSLog(@"C_title:%@",self.C_title);
     NSLog(@"C_id:%@",self.C_id);
     NSLog(@"P_type:%@",P_type);
-    creatParty=[[CreatPartyViewController alloc]init];
-    creatParty.title=@"创建party";
-    creatParty.from_P_type=@"2";
-    creatParty.from_C_title=self.C_title;
-    creatParty.from_C_id=self.C_id;
-    [self.navigationController pushViewController:creatParty animated:YES];
+    
+    NSLog(@"跳到地图");
+    mapControl=[[MapViewController alloc]init];
+    mapControl.title=@"创建派对地点";
+    mapControl.type=@"1";
+    mapControl.map_Temp=1;
+    mapControl.c_id=self.C_id;
+    mapControl.c_title=self.C_title;
+    [self.navigationController pushViewController:mapControl animated:YES];
+    [mapControl release];
+    
+    
+//    creatParty=[[CreatPartyViewController alloc]init];
+//    creatParty.title=@"创建party";
+//    creatParty.from_P_type=@"2";
+//    creatParty.from_C_title=self.C_title;
+//    creatParty.from_C_id=self.C_id;
+//    [self.navigationController pushViewController:creatParty animated:YES];
     //*******************************创建 party end********************************
 }
 

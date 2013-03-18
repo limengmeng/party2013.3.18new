@@ -17,6 +17,8 @@ int flag=0;
 @end
 
 @implementation MapViewController
+@synthesize c_id;
+@synthesize c_title;
 @synthesize map_Temp;
 @synthesize delegate;
 @synthesize city;
@@ -207,6 +209,8 @@ int flag=0;
         creatbefore.local=self.local;
         creatbefore.lat=lat;
         creatbefore.lng=lng;
+        creatbefore.c_title=self.c_title;
+        creatbefore.c_id=c_id;
         
         [self.navigationController pushViewController:creatbefore animated:YES];
     }
@@ -289,6 +293,8 @@ int flag=0;
     [geocoder release];
     [city release];
     [local release];
+    [c_id release];
+    [c_title release];
     [super dealloc];
 }
 - (void) hideTabBar:(BOOL) hidden {
