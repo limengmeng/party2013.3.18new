@@ -408,6 +408,7 @@
     mapControl=[[MapViewController alloc]init];
     mapControl.title=@"创建派对地点";
     mapControl.type=@"1";
+    mapControl.map_Temp=1;
     [self.navigationController pushViewController:mapControl animated:YES];
 
     //[mapControl release];

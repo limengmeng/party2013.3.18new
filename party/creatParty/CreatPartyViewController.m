@@ -447,6 +447,7 @@
     //[self.tabBarController.view addSubview:creatCtr.view];
 
     creatCtr.delegate=self;
+    creatCtr.map_Temp=2;
     [self.navigationController pushViewController:creatCtr animated:YES];
     [creatCtr release];
 }

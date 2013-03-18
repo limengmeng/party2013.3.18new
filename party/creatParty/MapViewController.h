@@ -29,7 +29,10 @@
     CreatBeforeViewController *creatbefore;
     
     NSString *type;
+    
+    int map_Temp;
 }
+@property int map_Temp;
 @property (strong,nonatomic) NSString *type;
 @property (strong,nonatomic) NSMutableString* city;
 @property (strong,nonatomic) NSMutableString* local;

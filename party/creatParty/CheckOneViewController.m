@@ -105,6 +105,7 @@ NSInteger prerow=-1;
 - (void)viewDidLoad
 {
     stateDictionary=[[NSMutableDictionary alloc]init];
+    temp=0;
     
     [super viewDidLoad];
     [self getUUidForthis];
@@ -520,20 +521,23 @@ NSInteger prerow=-1;
                     [sinaFriends addObject:[sinaList objectAtIndex:indexPath.row]];
                 else
                     [choiceFriends addObject:[self.playList objectAtIndex:indexPath.row]];
-                
+                if(self.spot==1) temp++;
                 //}
             }else{
+                [stateDictionary setObject:[NSNumber numberWithBool:NO] forKey:key];
+                newcell.accessoryType=UITableViewCellAccessoryNone;//超过5人不能继续添加
+                
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"人数不能超过5人" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 [alert release];
             }
-            if(self.spot==1) temp++;
         }
         else{
             button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor= [UIColor clearColor];
             newcell.accessoryView= button;
-            newcell.accessoryType=UITableViewCellAccessoryNone;
+            [stateDictionary setObject:[NSNumber numberWithBool:NO] forKey:key];
+            newcell.accessoryType=UITableViewCellAccessoryNone;//超过5人不能继续添加
             if(indexPath.section==0)
                 [choiceFriends removeObject:[self.list objectAtIndex:indexPath.row]];
             else if(indexPath.section==1)

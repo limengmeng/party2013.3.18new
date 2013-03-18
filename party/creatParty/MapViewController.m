@@ -17,6 +17,7 @@ int flag=0;
 @end
 
 @implementation MapViewController
+@synthesize map_Temp;
 @synthesize delegate;
 @synthesize city;
 @synthesize local;
@@ -198,15 +199,20 @@ int flag=0;
     [delegate passCity:self.city andLocal:self.local];
     [delegate passLat:lat andLng:lng];
 //    [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"跳到创建初始界面");
-    creatbefore=[[CreatBeforeViewController alloc]init];
-    creatbefore.type=self.type;
-    creatbefore.city=self.city;
-    creatbefore.local=self.local;
-    creatbefore.lat=lat;
-    creatbefore.lng=lng;
-    
-    [self.navigationController pushViewController:creatbefore animated:YES];
+    if(map_Temp==1){
+        NSLog(@"跳到创建初始界面");
+        creatbefore=[[CreatBeforeViewController alloc]init];
+        creatbefore.type=self.type;
+        creatbefore.city=self.city;
+        creatbefore.local=self.local;
+        creatbefore.lat=lat;
+        creatbefore.lng=lng;
+        
+        [self.navigationController pushViewController:creatbefore animated:YES];
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 
