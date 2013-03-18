@@ -23,6 +23,7 @@
     NSDate *time;
     UITableView *tableviewF;
     NSMutableArray *friengArr;
+    NSMutableArray *sinaArr;
     
     UIButton *btn;//创建按钮
     
@@ -50,6 +51,8 @@
 @property float lat,lng;
 //*******************************
 @property (nonatomic,retain) NSMutableArray *friengArr;
+
+@property (nonatomic,retain) NSMutableArray *sinaArr;
 
 @property (nonatomic,retain) NSString *P_title;
 

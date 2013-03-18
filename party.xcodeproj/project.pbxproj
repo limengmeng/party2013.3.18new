@@ -49,6 +49,11 @@
 		52C4C8CF16ED6F5200F079D4 /* ycombopass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C4C8B716ED6F5200F079D4 /* ycombopass@2x.png */; };
 		52C9916316E87B3B00651A01 /* firstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C9916216E87B3B00651A01 /* firstViewController.m */; };
 		52C9916516E87B4E00651A01 /* FiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C9916416E87B4E00651A01 /* FiveViewController.m */; };
+		52D2DDC416F6F49C0088AE22 /* CheckOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D2DDC116F6F49C0088AE22 /* CheckOneViewController.m */; };
+		52D2DDC516F6F49C0088AE22 /* CreatPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D2DDC316F6F49C0088AE22 /* CreatPartyViewController.m */; };
+		52D2DDCC16F6F4C90088AE22 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D2DDC716F6F4C90088AE22 /* MapViewController.m */; };
+		52D2DDCD16F6F4C90088AE22 /* CreatBeforeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D2DDC916F6F4C90088AE22 /* CreatBeforeViewController.m */; };
+		52D2DDCE16F6F4C90088AE22 /* InvitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D2DDCB16F6F4C90088AE22 /* InvitViewController.m */; };
 		52DC51F316BFAFCE0012BD2D /* IDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC51E916BFAFCD0012BD2D /* IDViewController.m */; };
 		52DC51F416BFAFCE0012BD2D /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC51EB16BFAFCD0012BD2D /* PrivacyViewController.m */; };
 		52DC51F616BFAFCE0012BD2D /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52DC51EE16BFAFCE0012BD2D /* city.plist */; };
@@ -150,14 +155,9 @@
 		9DDA0FF416F05AD70024C608 /* WeiboSignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDA0FF316F05AD60024C608 /* WeiboSignIn.m */; };
 		9DDBA02416DCA5D200D5CBC4 /* PagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBA02316DCA5D200D5CBC4 /* PagedFlowView.m */; };
 		9DDE58A016F6AFB7001988B0 /* WeiboAuthentication.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DDA0FBB16F050E10024C608 /* WeiboAuthentication.h */; };
-		9DDE58FA16F6C631001988B0 /* CheckOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58E816F6C631001988B0 /* CheckOneViewController.m */; };
-		9DDE58FB16F6C631001988B0 /* CreatPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58EA16F6C631001988B0 /* CreatPartyViewController.m */; };
 		9DDE58FC16F6C631001988B0 /* CreatPartyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE58EB16F6C631001988B0 /* CreatPartyViewController.xib */; };
 		9DDE58FD16F6C631001988B0 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58ED16F6C631001988B0 /* CustomAnnotation.m */; };
 		9DDE58FE16F6C631001988B0 /* SelectCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE58EE16F6C631001988B0 /* SelectCheck@2x.png */; };
-		9DDE58FF16F6C631001988B0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F016F6C631001988B0 /* MapViewController.m */; };
-		9DDE590016F6C631001988B0 /* CreatBeforeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F216F6C631001988B0 /* CreatBeforeViewController.m */; };
-		9DDE590116F6C631001988B0 /* InvitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F416F6C631001988B0 /* InvitViewController.m */; };
 		9DDE590216F6C631001988B0 /* InvitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDE58F516F6C631001988B0 /* InvitViewController.xib */; };
 		9DDE590316F6C631001988B0 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F716F6C631001988B0 /* ModalAlert.m */; };
 		9DDE590416F6C631001988B0 /* infoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F916F6C631001988B0 /* infoViewController.m */; };
@@ -402,6 +402,16 @@
 		52C4C8B716ED6F5200F079D4 /* ycombopass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ycombopass@2x.png"; sourceTree = "<group>"; };
 		52C9916216E87B3B00651A01 /* firstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstViewController.m; sourceTree = "<group>"; };
 		52C9916416E87B4E00651A01 /* FiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveViewController.m; sourceTree = "<group>"; };
+		52D2DDC016F6F49C0088AE22 /* CheckOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOneViewController.h; sourceTree = "<group>"; };
+		52D2DDC116F6F49C0088AE22 /* CheckOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOneViewController.m; sourceTree = "<group>"; };
+		52D2DDC216F6F49C0088AE22 /* CreatPartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatPartyViewController.h; sourceTree = "<group>"; };
+		52D2DDC316F6F49C0088AE22 /* CreatPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatPartyViewController.m; sourceTree = "<group>"; };
+		52D2DDC616F6F4C90088AE22 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		52D2DDC716F6F4C90088AE22 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		52D2DDC816F6F4C90088AE22 /* CreatBeforeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatBeforeViewController.h; sourceTree = "<group>"; };
+		52D2DDC916F6F4C90088AE22 /* CreatBeforeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatBeforeViewController.m; sourceTree = "<group>"; };
+		52D2DDCA16F6F4C90088AE22 /* InvitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitViewController.h; sourceTree = "<group>"; };
+		52D2DDCB16F6F4C90088AE22 /* InvitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitViewController.m; sourceTree = "<group>"; };
 		52DC51E816BFAFCD0012BD2D /* IDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDViewController.h; sourceTree = "<group>"; };
 		52DC51E916BFAFCD0012BD2D /* IDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDViewController.m; sourceTree = "<group>"; };
 		52DC51EA16BFAFCD0012BD2D /* PrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyViewController.h; sourceTree = "<group>"; };
@@ -538,20 +548,10 @@
 		9DDA0FF316F05AD60024C608 /* WeiboSignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboSignIn.m; sourceTree = "<group>"; };
 		9DDBA02216DCA5D200D5CBC4 /* PagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagedFlowView.h; sourceTree = "<group>"; };
 		9DDBA02316DCA5D200D5CBC4 /* PagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagedFlowView.m; sourceTree = "<group>"; };
-		9DDE58E716F6C631001988B0 /* CheckOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOneViewController.h; sourceTree = "<group>"; };
-		9DDE58E816F6C631001988B0 /* CheckOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOneViewController.m; sourceTree = "<group>"; };
-		9DDE58E916F6C631001988B0 /* CreatPartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatPartyViewController.h; sourceTree = "<group>"; };
-		9DDE58EA16F6C631001988B0 /* CreatPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatPartyViewController.m; sourceTree = "<group>"; };
 		9DDE58EB16F6C631001988B0 /* CreatPartyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreatPartyViewController.xib; sourceTree = "<group>"; };
 		9DDE58EC16F6C631001988B0 /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
 		9DDE58ED16F6C631001988B0 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
 		9DDE58EE16F6C631001988B0 /* SelectCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SelectCheck@2x.png"; sourceTree = "<group>"; };
-		9DDE58EF16F6C631001988B0 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		9DDE58F016F6C631001988B0 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		9DDE58F116F6C631001988B0 /* CreatBeforeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatBeforeViewController.h; sourceTree = "<group>"; };
-		9DDE58F216F6C631001988B0 /* CreatBeforeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatBeforeViewController.m; sourceTree = "<group>"; };
-		9DDE58F316F6C631001988B0 /* InvitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitViewController.h; sourceTree = "<group>"; };
-		9DDE58F416F6C631001988B0 /* InvitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitViewController.m; sourceTree = "<group>"; };
 		9DDE58F516F6C631001988B0 /* InvitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitViewController.xib; sourceTree = "<group>"; };
 		9DDE58F616F6C631001988B0 /* ModalAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalAlert.h; sourceTree = "<group>"; };
 		9DDE58F716F6C631001988B0 /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
@@ -1034,20 +1034,20 @@
 				9D9512CA16BD4F8B00C95C67 /* chuangjian@2x.png */,
 				9DD7E60116C13AEC006CEECE /* checkcell@2x.png */,
 				9DD7E5FF16C13AE9006CEECE /* check1@2x.png */,
-				9DDE58E716F6C631001988B0 /* CheckOneViewController.h */,
-				9DDE58E816F6C631001988B0 /* CheckOneViewController.m */,
-				9DDE58E916F6C631001988B0 /* CreatPartyViewController.h */,
-				9DDE58EA16F6C631001988B0 /* CreatPartyViewController.m */,
+				52D2DDC016F6F49C0088AE22 /* CheckOneViewController.h */,
+				52D2DDC116F6F49C0088AE22 /* CheckOneViewController.m */,
+				52D2DDC216F6F49C0088AE22 /* CreatPartyViewController.h */,
+				52D2DDC316F6F49C0088AE22 /* CreatPartyViewController.m */,
 				9DDE58EB16F6C631001988B0 /* CreatPartyViewController.xib */,
 				9DDE58EC16F6C631001988B0 /* CustomAnnotation.h */,
 				9DDE58ED16F6C631001988B0 /* CustomAnnotation.m */,
 				9DDE58EE16F6C631001988B0 /* SelectCheck@2x.png */,
-				9DDE58EF16F6C631001988B0 /* MapViewController.h */,
-				9DDE58F016F6C631001988B0 /* MapViewController.m */,
-				9DDE58F116F6C631001988B0 /* CreatBeforeViewController.h */,
-				9DDE58F216F6C631001988B0 /* CreatBeforeViewController.m */,
-				9DDE58F316F6C631001988B0 /* InvitViewController.h */,
-				9DDE58F416F6C631001988B0 /* InvitViewController.m */,
+				52D2DDC616F6F4C90088AE22 /* MapViewController.h */,
+				52D2DDC716F6F4C90088AE22 /* MapViewController.m */,
+				52D2DDC816F6F4C90088AE22 /* CreatBeforeViewController.h */,
+				52D2DDC916F6F4C90088AE22 /* CreatBeforeViewController.m */,
+				52D2DDCA16F6F4C90088AE22 /* InvitViewController.h */,
+				52D2DDCB16F6F4C90088AE22 /* InvitViewController.m */,
 				9DDE58F516F6C631001988B0 /* InvitViewController.xib */,
 				9DDE58F616F6C631001988B0 /* ModalAlert.h */,
 				9DDE58F716F6C631001988B0 /* ModalAlert.m */,
@@ -1951,17 +1951,17 @@
 				9DDA0FEF16F052060024C608 /* PathHelper.m in Sources */,
 				9DDA0FF216F052210024C608 /* MBProgressHUD.m in Sources */,
 				9DDA0FF416F05AD70024C608 /* WeiboSignIn.m in Sources */,
-				9DDE58FA16F6C631001988B0 /* CheckOneViewController.m in Sources */,
-				9DDE58FB16F6C631001988B0 /* CreatPartyViewController.m in Sources */,
 				9DDE58FD16F6C631001988B0 /* CustomAnnotation.m in Sources */,
-				9DDE58FF16F6C631001988B0 /* MapViewController.m in Sources */,
-				9DDE590016F6C631001988B0 /* CreatBeforeViewController.m in Sources */,
-				9DDE590116F6C631001988B0 /* InvitViewController.m in Sources */,
 				9DDE590316F6C631001988B0 /* ModalAlert.m in Sources */,
 				9DDE590416F6C631001988B0 /* infoViewController.m in Sources */,
 				9DDE590716F6C657001988B0 /* DetailViewController.m in Sources */,
 				9DDE590A16F6C71B001988B0 /* secondViewController.m in Sources */,
 				9DDE590D16F6DEA3001988B0 /* thirdViewController.m in Sources */,
+				52D2DDC416F6F49C0088AE22 /* CheckOneViewController.m in Sources */,
+				52D2DDC516F6F49C0088AE22 /* CreatPartyViewController.m in Sources */,
+				52D2DDCC16F6F4C90088AE22 /* MapViewController.m in Sources */,
+				52D2DDCD16F6F4C90088AE22 /* CreatBeforeViewController.m in Sources */,
+				52D2DDCE16F6F4C90088AE22 /* InvitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

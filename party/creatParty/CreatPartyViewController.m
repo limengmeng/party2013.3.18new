@@ -17,7 +17,7 @@
 @end
 
 @implementation CreatPartyViewController
-
+@synthesize sinaArr;
 @synthesize friengArr;
 @synthesize lat,lng;
 @synthesize map_city,map_local;
@@ -60,7 +60,10 @@
 - (void)viewDidLoad
 {
     
-    NSLog(@"self.choiceFriends=======%@",self.time);
+    
+    
+    NSLog(@"friengArr=======%@",friengArr);
+    NSLog(@"sinaArr=======%@",sinaArr);
 
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:1];
@@ -300,8 +303,15 @@
         [self.creat addSubview:imageView];
         [imageView release];
     }
+    for (int i=0; i<[sinaArr count]; i++) {
+        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0+40*(i+[friengArr count]), 2, 35, 35)];
+        NSURL* imageurl=[NSURL URLWithString:[[sinaArr objectAtIndex:i] objectForKey:@"avatar_large"]];
+        [imageView setImageWithURL:imageurl];
+        [self.creat addSubview:imageView];
+        [imageView release];
+    }
     
-    if ([friengArr count]!=0) {
+    if ([friengArr count]!=0||[sinaArr count]!=0) {
         creat.placeholder=@"";
     }
 }
@@ -332,6 +342,7 @@
     inviController.time=self.time;
     inviController.info=P_info;
     inviController.friendId=friengArr;
+    inviController.sinaArray=sinaArr;
     inviController.from_Creat_p_type=self.from_P_type;
     inviController.from_Creat_C_id=self.from_C_id;
     inviController.lng=self.lng;
@@ -578,7 +589,7 @@
     [creat release];
     [P_info release];
     [P_local release];
-    
+    [sinaArr release];
     [super dealloc];
 }
 

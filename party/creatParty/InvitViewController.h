@@ -30,6 +30,7 @@
     NSString *from_Creat_C_id;
     NSString *from_Creat_p_type;
     
+    NSMutableArray *sinaArray;
     NSMutableArray *friendId;
     NSString * phone;
     
@@ -60,6 +61,8 @@
 @property (nonatomic,copy) NSString *info;
 @property (nonatomic,copy) NSString *local;
 @property (nonatomic,copy) NSMutableArray *friendId;
+@property (nonatomic,copy) NSMutableArray *sinaArray;
+
 @property (nonatomic,retain) NSString *phone;
 
 @property (nonatomic,retain) NSString *examineText;

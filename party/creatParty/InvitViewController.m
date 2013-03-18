@@ -29,6 +29,7 @@
 @synthesize stitle,info,local,time,friendId,phone;
 @synthesize from_Creat_C_id,from_Creat_p_type;
 @synthesize userUUid;
+@synthesize sinaArray;
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -264,6 +265,15 @@
                            else
                                [stringFriId appendFormat:@",%@",[[self.friendId objectAtIndex:i] objectForKey:@"USER_ID"]];
                        }
+                       NSMutableString *sinaFriId=[[NSMutableString alloc]init];
+                       
+                       for (int i=0; i<[sinaArray count]; i++) {
+                           if(i==0)
+                               [sinaFriId appendFormat:@"%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
+                           else
+                               [sinaFriId appendFormat:@",%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
+                       }
+
                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
                        self.from_time=[formatter stringFromDate:self.time];
@@ -283,6 +293,7 @@
                        [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lat] forKey:@"lat"];
                        [rrequest setPostValue:self.map_city forKey: @"p_city"];
                        [rrequest setPostValue:stringFriId forKey: @"users"];
+                       [rrequest setPostValue:sinaFriId forKey:@"xin_users"];
                        [rrequest setPostValue:self.examineText forKey: @"p_invite"];
                        [rrequest setPostValue:self.phone forKey: @"p_phone"];
                        
@@ -298,8 +309,11 @@
                        NSLog(@"stringFriId=======%@",stringFriId);
                        NSLog(@"self.examineText=======%@",self.examineText);
                        NSLog(@"self.phone=======%@",self.phone);
+                       NSLog(@"stringFriId====%@",stringFriId);
+                       NSLog(@"sinaFriId====%@",sinaFriId);
                        
                        [stringFriId release];
+                       [sinaFriId release];
                        
                        //rrequest.delegate=self;
                        [rrequest startSynchronous];

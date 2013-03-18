@@ -12,6 +12,7 @@
 #import "ASIFormDataRequest.h"
 #import "SDImageView+SDWebCache.h"
 #import "CreatPartyViewController.h"
+#import "WeiboAccount.h"
 
 NSInteger prerow=-1;
 @interface CheckOneViewController ()
@@ -19,7 +20,6 @@ NSInteger prerow=-1;
 @end
 
 @implementation CheckOneViewController
-@synthesize stateDictionary;
 @synthesize time;
 @synthesize type;
 @synthesize check_city;
@@ -31,7 +31,6 @@ NSInteger prerow=-1;
 @synthesize from_c_id;
 @synthesize from_p_id;
 @synthesize playList;
-@synthesize choiceFriends;
 @synthesize spot;
 
 @synthesize list;
@@ -105,15 +104,17 @@ NSInteger prerow=-1;
 
 - (void)viewDidLoad
 {
+    stateDictionary=[[NSMutableDictionary alloc]init];
+    
     [super viewDidLoad];
     [self getUUidForthis];
     self.view.backgroundColor=[UIColor colorWithRed:248.0/255 green:247.0/255 blue:246.0/255 alpha:1];
     self.tableView.backgroundView=nil;
-    //self.tableView=[[UITableView alloc]initWithFrame:mainscreen style:UITableViewStylePlain];
     self.tableView.delegate=self;
     self.title=@"好友列表";
     //******************************右侧确认按钮************************************
     //确定
+    
     if(self.spot!=3){
         UIButton* donebutton=[UIButton  buttonWithType:UIButtonTypeCustom];
         donebutton.frame=CGRectMake(0.0, 0.0, 50, 31);
@@ -123,12 +124,15 @@ NSInteger prerow=-1;
         self.navigationItem.rightBarButtonItem=Makedone;
         [Makedone release];
     }
-    
     choiceFriends=[[NSMutableArray alloc]init];
+    sinaFriends=[[NSMutableArray alloc]init];
+    sinaList=[[NSMutableArray alloc]init];
     if(self.spot==2)
         [self loadPartydetail];
-    else
+    else{
         [self loadFridetail];
+        //[self loadXinDetail];
+    }
 
     //******************************右侧确认按钮 end************************************
 }
@@ -169,24 +173,57 @@ NSInteger prerow=-1;
     [request setDelegate:self];
     [request startAsynchronous];
 }
+//从服务器获取新浪互粉好友
+-(void)loadXinDetail{
+    dataFlag=3;
+    
+    WeiboAccount *weiboShare=[[WeiboAccount alloc] init];
+    weiboShare.accessToken=@"2.00raBjnBF_9IdDee1d5bb9c20tjAKX";
+    weiboShare.userId=@"1650904185";
+    NSString *stringUrl=[NSString stringWithFormat:@"https://api.weibo.com/2/friendships/friends/bilateral.json?uid=%@&access_token=%@",weiboShare.userId,weiboShare.accessToken];
+    NSLog(@"接口1：：：：%@",stringUrl);
+    NSURL* url=[NSURL URLWithString:stringUrl];
+    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+    request.delegate = self;
+    request.shouldAttemptPersistentConnection = NO;
+    [request setValidatesSecureCertificate:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    //[request setDidFailSelector:@selector(requestDidFailed:)];
+    [request startAsynchronous];
+
+}
+
+
 //******************************ASIHttp 代理方法************************************
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    
-    if (dataFlag==2) {
+    if (dataFlag==3) {//新浪好友
+        NSData* response=[request responseData];
+        //NSLog(@"%@",response);
+        NSError* error;
+        NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+        sinaList=[[NSMutableArray alloc]initWithArray:[bizDic objectForKey:@"users"]];
+        NSLog(@"%@",bizDic);
+        NSLog(@"新浪列表finish=============%@",sinaList);
+    }
+    else if (dataFlag==2) {
         NSData* response=[request responseData];
         //NSLog(@"%@",response);
         NSError* error;
         NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
         playList=[[NSMutableArray alloc]initWithArray:[bizDic objectForKey:@"users"]];
         [self loadFridetail];
-    }else if(dataFlag==1){
+        NSLog(@"玩伴列表finish=============%@",self.list);
+    }
+    
+    if(dataFlag==1){
         NSData* response=[request responseData];
         //NSLog(@"%@",response);
         NSError* error;
         NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
         list=[[NSMutableArray alloc]initWithArray:[bizDic objectForKey:@"users"]];
         NSLog(@"好友列表finish=============%@",self.list);
+        [self loadXinDetail];
     }
     NSLog(@"好友列表finish=============%@",self.list);
     [self.tableView reloadData];
@@ -217,10 +254,10 @@ NSInteger prerow=-1;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.spot==2) {
-        return 2;
+        return 3;
     }
     else
-        return 1;
+        return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -228,6 +265,8 @@ NSInteger prerow=-1;
     //返回好友数据
     if(section==0)
         return [self.list count];
+    else if(section==1)
+        return [sinaList count];
     else
         return [self.playList count];//返回玩伴数据
 }
@@ -245,12 +284,14 @@ NSInteger prerow=-1;
     headerLabel.font = [UIFont boldSystemFontOfSize:12];
     headerLabel.frame = CGRectMake(10.0, 0.0, 300.0, 44.0);
     if(section==0){
-        if(self.spot==1||self.spot==3)
-            headerLabel.text =  @"";
-        else
+//        if(self.spot==1||self.spot==3||self.spot==4)
+//            headerLabel.text =  @"";
+//        else
             headerLabel.text =  @"好友列表";
     }
-    else
+    if(section==1)
+        headerLabel.text=@"新浪互粉";
+    if(section==2)
         headerLabel.text = @"玩伴列表";
     [customView addSubview:headerLabel];
     return customView;
@@ -259,7 +300,7 @@ NSInteger prerow=-1;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if(section==0){
-        if(self.spot==1||self.spot==3)
+        if(self.spot==1||self.spot==3||self.spot==4)
             return 0;
         else
             return 40;
@@ -295,6 +336,10 @@ NSInteger prerow=-1;
         NSLog(@"好友列表=============%@",self.list);
     }
     else if(indexPath.section==1){
+        dic=[sinaList objectAtIndex:row];
+        NSLog(@"新浪互粉=============%@",sinaList);
+    }
+    else if(indexPath.section==2){
         dic=[self.playList objectAtIndex:row];
         NSLog(@"玩伴列表=============%@",self.playList);
     }
@@ -302,7 +347,10 @@ NSInteger prerow=-1;
     
 //*****************************头像**************************************
     UIImageView* imgView=[[UIImageView alloc]initWithFrame:CGRectMake(9, 8, 39, 39)];
-    NSURL* imageurl=[NSURL URLWithString:[dic objectForKey:@"USER_PIC"]];
+    NSURL* imageurl;
+    if(indexPath.section==1) imageurl=[NSURL URLWithString:[dic objectForKey:@"avatar_large"]];
+    else
+        imageurl=[NSURL URLWithString:[dic objectForKey:@"USER_PIC"]];
     [imgView setImageWithURL: imageurl refreshCache:NO placeholderImage:[UIImage imageNamed:@"placeholderImage@2x.png"]];
     [cell.contentView addSubview:imgView];
     [imgView release];
@@ -310,18 +358,27 @@ NSInteger prerow=-1;
     
     //*****************************性别***********************************
     UIImageView* seximage=[[UIImageView alloc]initWithFrame:CGRectMake(58, 12, 11, 13)];
-    if([[[dic objectForKey:@"USER_SEX"]substringToIndex:1] isEqualToString:@"M"])
-        seximage.image=[UIImage imageNamed:@"PRmale1@2x.png"];
-    else
-        seximage.image=[UIImage imageNamed:@"PRfemale1@2x.png"];
+    if(indexPath.section==1){
+        if([[[dic objectForKey:@"gender"]substringToIndex:1] isEqualToString:@"m"])
+            seximage.image=[UIImage imageNamed:@"PRmale1@2x.png"];
+        else
+            seximage.image=[UIImage imageNamed:@"PRfemale1@2x.png"];
+    }else{
+        if([[[dic objectForKey:@"USER_SEX"]substringToIndex:1] isEqualToString:@"M"])
+            seximage.image=[UIImage imageNamed:@"PRmale1@2x.png"];
+        else
+            seximage.image=[UIImage imageNamed:@"PRfemale1@2x.png"];
+    }
     [cell.contentView addSubview:seximage];
     [seximage release];
     //*****************************性别 end***********************************
     
     //*****************************姓名***********************************
-    UILabel* namelabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 9, 100, 20)];
+    UILabel* namelabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 9, 200, 20)];
     namelabel.font=[UIFont systemFontOfSize:14];
-    namelabel.text=[dic objectForKey:@"USER_NICK"];
+    if(indexPath.section==1) namelabel.text=[dic objectForKey:@"name"];
+    else
+        namelabel.text=[dic objectForKey:@"USER_NICK"];
     namelabel.textColor=[UIColor colorWithRed:96.0/255 green:95.0/255 blue:111.0/255 alpha:1];
     namelabel.backgroundColor=[UIColor clearColor];
     [cell.contentView addSubview:namelabel];
@@ -333,31 +390,44 @@ NSInteger prerow=-1;
     agelabel.font=[UIFont systemFontOfSize:13];
     agelabel.backgroundColor=[UIColor clearColor];
     agelabel.textColor=[UIColor grayColor];
-    agelabel.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"USER_AGE"]];
+    if(indexPath.section!=1) agelabel.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"USER_AGE"]];
     [cell.contentView addSubview:agelabel];
     [agelabel release];
     //*****************************年龄 end***********************************
-    
-    //*****************************城市 地区***********************************
-    UILabel* citylabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 25, 40, 30)];
-    citylabel.font=[UIFont systemFontOfSize:13];
-    citylabel.backgroundColor=[UIColor clearColor];
-    citylabel.textColor=[UIColor grayColor];
-    if (![[dic objectForKey:@"USER_CITY"] isEqualToString:@"(null)"]) {
-        citylabel.text=[dic objectForKey:@"USER_CITY"];
+    if (indexPath.section==1) {
+        //*****************************城市 地区***********************************
+        UILabel* citylabel=[[UILabel alloc]initWithFrame:CGRectMake(75, 25, 100, 30)];
+        citylabel.font=[UIFont systemFontOfSize:13];
+        citylabel.backgroundColor=[UIColor clearColor];
+        citylabel.textColor=[UIColor grayColor];
+        if (![[dic objectForKey:@"location"] isEqualToString:@"(null)"]) {
+            citylabel.text=[dic objectForKey:@"location"];
+        }
+        [cell.contentView addSubview:citylabel];
+        [citylabel release];
+        //*****************************城市 地区 end**********************************
+    }else{
+        //*****************************城市 地区***********************************
+        UILabel* citylabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 25, 40, 30)];
+        citylabel.font=[UIFont systemFontOfSize:13];
+        citylabel.backgroundColor=[UIColor clearColor];
+        citylabel.textColor=[UIColor grayColor];
+        if (![[dic objectForKey:@"USER_CITY"] isEqualToString:@"(null)"]) {
+            citylabel.text=[dic objectForKey:@"USER_CITY"];
+        }
+        
+        UILabel* locallabel=[[UILabel alloc]initWithFrame:CGRectMake(140, 25, 40, 30)];
+        locallabel.font=[UIFont systemFontOfSize:13];
+        locallabel.backgroundColor=[UIColor clearColor];
+        locallabel.textColor=[UIColor grayColor];
+        if (![[dic objectForKey:@"USER_LOCAL"] isEqualToString:@"(null)"]) {
+            locallabel.text=[dic objectForKey:@"USER_LOCAL"];
+        }
+        [cell.contentView addSubview:citylabel];
+        [cell.contentView addSubview:locallabel];
+        [citylabel release];
+        [locallabel release];
     }
-    
-    UILabel* locallabel=[[UILabel alloc]initWithFrame:CGRectMake(140, 25, 40, 30)];
-    locallabel.font=[UIFont systemFontOfSize:13];
-    locallabel.backgroundColor=[UIColor clearColor];
-    locallabel.textColor=[UIColor grayColor];
-    if (![[dic objectForKey:@"USER_LOCAL"] isEqualToString:@"(null)"]) {
-        locallabel.text=[dic objectForKey:@"USER_LOCAL"];
-    }
-    [cell.contentView addSubview:citylabel];
-    [cell.contentView addSubview:locallabel];
-    [citylabel release];
-    [locallabel release];
     //*****************************城市 地区 end**********************************
     if (self.spot!=3) {
         UIImageView *imagView=[[UIImageView alloc]initWithFrame:CGRectMake(289,19,21,21)];
@@ -367,15 +437,59 @@ NSInteger prerow=-1;
         [imagView release];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
+    // Set cell label
+    NSString *key = [@"Row " stringByAppendingFormat:@"%d,%d",indexPath.section,indexPath.row];
+    //cell.textLabel.text = key;
+    
+    // Set cell checkmark
+    NSNumber *checked = [stateDictionary objectForKey:key];
+    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
+    if (!checked) [stateDictionary setObject:(checked = [NSNumber numberWithBool:NO]) forKey:key];
+    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
+    cell.accessoryType = checked.boolValue ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+    NSLog(@"checked.boolValue====%c,self.stateDictionary=====%@",checked.boolValue,stateDictionary);
+    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    if(cell.accessoryType==UITableViewCellAccessoryCheckmark){
+        //************************添加对勾************************************
+        UIImage *image= [UIImage   imageNamed:@"checkcell@2x.png"];
+        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+        button.frame = frame;
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor clearColor];
+        cell.accessoryView=button;
+    }
     return cell;
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    UITableViewCell* newcell=[tableView cellForRowAtIndexPath:indexPath];
+    // Recover the cell and key
+	UITableViewCell *newcell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *key = [@"Row " stringByAppendingFormat:@"%d,%d",indexPath.section,indexPath.row];
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+	// Created an inverted value and store it
+	BOOL isChecked = !([[stateDictionary objectForKey:key] boolValue]);
+    
+    NSLog(@"isChecked====%c,self.stateDictionary=====%@",isChecked,stateDictionary);
+    
+	NSNumber *checked = [NSNumber numberWithBool:isChecked];
+    
+    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
+    
+	[stateDictionary setObject:checked forKey:key];
+	
+    NSLog(@"checked====%@,self.stateDictionary=====%@",checked,stateDictionary);
+    
+	// Update the cell accessory checkmark
+	newcell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+    
+    NSLog(@"isChecked====%d,self.stateDictionary=====%@",isChecked,stateDictionary);
+    
     //******************************查看好友详细信息************************************
     if (spot==3) {
         newcell.accessoryType=UITableViewCellAccessoryNone;
@@ -388,28 +502,32 @@ NSInteger prerow=-1;
     }
     //******************************查看好友详细信息 end************************************
     else{
-        if(newcell.accessoryType==UITableViewCellAccessoryNone){
+        if(newcell.accessoryType==UITableViewCellAccessoryCheckmark){
             if (temp<5) {
-                if(newcell.accessoryType==UITableViewCellAccessoryCheckmark){
-                    //************************添加对勾************************************
-                    UIImage *image= [UIImage   imageNamed:@"checkcell@2x.png"];
-                    CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-                    button.frame = frame;
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
-                    button.backgroundColor = [UIColor clearColor];
-                    newcell.accessoryView=button;
-                    //************************添加对勾 end************************************
-                    if(indexPath.section==0)
-                        [self.choiceFriends addObject:[self.list objectAtIndex:indexPath.row]];
-                    else
-                        [self.choiceFriends addObject:[self.playList objectAtIndex:indexPath.row]];
-                    if(self.spot==1) temp++;
-                }
+                //if(newcell.accessoryType=UITableViewCellAccessoryCheckmark){
+                //************************添加对勾************************************
+                UIImage *image= [UIImage   imageNamed:@"checkcell@2x.png"];
+                CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+                button.frame = frame;
+                [button setBackgroundImage:image forState:UIControlStateNormal];
+                button.backgroundColor = [UIColor clearColor];
+                newcell.accessoryView=button;
+                //[newcell.contentView addSubview:button];
+                //************************添加对勾 end************************************
+                if(indexPath.section==0)
+                    [choiceFriends addObject:[self.list objectAtIndex:indexPath.row]];
+                else if (indexPath.section==1)
+                    [sinaFriends addObject:[sinaList objectAtIndex:indexPath.row]];
+                else
+                    [choiceFriends addObject:[self.playList objectAtIndex:indexPath.row]];
+                
+                //}
             }else{
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"人数不能超过5人" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
                 [alert release];
             }
+            if(self.spot==1) temp++;
         }
         else{
             button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -417,12 +535,13 @@ NSInteger prerow=-1;
             newcell.accessoryView= button;
             newcell.accessoryType=UITableViewCellAccessoryNone;
             if(indexPath.section==0)
-                [self.choiceFriends removeObject:[self.list objectAtIndex:indexPath.row]];
+                [choiceFriends removeObject:[self.list objectAtIndex:indexPath.row]];
+            else if(indexPath.section==1)
+                [sinaFriends removeObject:[sinaList objectAtIndex:indexPath.row]];
             if(self.spot==1) temp--;
         }
-        lastIndexPath=indexPath;
+        //lastIndexPath=indexPath;
     }
-    
 }
 
 //******************************上传邀请好友信息************************************
@@ -432,10 +551,10 @@ NSInteger prerow=-1;
         NSString* str=@"mac/party/IF00023";
         NSString* strURL=globalURL(str);
         NSURL* url=[NSURL URLWithString:strURL];
-        for (int i=0; i<[self.choiceFriends count]; i++) {
+        for (int i=0; i<[choiceFriends count]; i++) {
             ASIFormDataRequest *request =  [ASIFormDataRequest  requestWithURL:url];
             [request setPostValue:self.userUUid forKey: @"uuid"];
-            [request setPostValue:[[self.choiceFriends objectAtIndex:i] objectForKey:@"USER_ID"] forKey:@"user_id"];
+            [request setPostValue:[[choiceFriends objectAtIndex:i] objectForKey:@"USER_ID"] forKey:@"user_id"];
             [request setPostValue:self.from_p_id forKey:@"p_id"];
             //[request setDelegate:self];
             [request startSynchronous];
@@ -444,7 +563,8 @@ NSInteger prerow=-1;
     
 
     
-    NSLog(@"self.choiceFriends=======%@",self.choiceFriends);
+    NSLog(@"self.choiceFriends=======%@",choiceFriends);
+    NSLog(@"self.choiceFriends=======%@",sinaFriends);
     
     NSLog(@"传值。。。。。。%@,%@",self.check_time,self.check_name);
     
@@ -460,13 +580,18 @@ NSInteger prerow=-1;
     
     party.map_local=self.check_local;
     
-    party.friengArr=self.choiceFriends;
+    party.friengArr=choiceFriends;
+    
+    party.sinaArr=sinaFriends;
     
     party.lat=self.lat;
     
     party.lng=self.lng;
     
     party.time=self.time;
+    
+    NSLog(@"self.choiceFriends=======%@",choiceFriends);
+    NSLog(@"self.choiceFriends=======%@",sinaFriends);
     
     NSLog(@"传值。。。。。====%@",self.time);
     
@@ -487,7 +612,7 @@ NSInteger prerow=-1;
     
     if(self.spot==1){
         if (self.from_p_id==0)
-            [delegateFriend CallBack:self.choiceFriends];
+            [delegateFriend CallBack:choiceFriends];
         //[self.choiceFriends removeAllObjects];
     }
 }
@@ -528,13 +653,61 @@ NSInteger prerow=-1;
 }
 //******************************删除好友 end************************************
 
-
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section==0) {
+        UIView* footerview=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)]autorelease];
+        footerview.backgroundColor=[UIColor clearColor];
+        UIButton* morebutton=[UIButton buttonWithType:UIButtonTypeCustom];
+        morebutton.frame=CGRectMake(57, 10, 206, 32);
+        [morebutton setImage:[UIImage imageNamed:@"searchMore@2x.png"] forState:UIControlStateNormal];
+        [morebutton addTarget:self action:@selector(listclickmore) forControlEvents:UIControlEventTouchDown];
+        [footerview addSubview:morebutton];
+        return footerview;
+    }
+    else if(section==1){
+        UIView* footerview=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)]autorelease];
+        footerview.backgroundColor=[UIColor clearColor];
+        UIButton* morebutton=[UIButton buttonWithType:UIButtonTypeCustom];
+        morebutton.frame=CGRectMake(57, 10, 206, 32);
+        [morebutton setImage:[UIImage imageNamed:@"searchMore@2x.png"] forState:UIControlStateNormal];
+        [morebutton addTarget:self action:@selector(sinaListclickmore) forControlEvents:UIControlEventTouchDown];
+        [footerview addSubview:morebutton];
+        return footerview;
+    }
+    else if(section==2){
+        UIView* footerview=[[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)]autorelease];
+        footerview.backgroundColor=[UIColor clearColor];
+        UIButton* morebutton=[UIButton buttonWithType:UIButtonTypeCustom];
+        morebutton.frame=CGRectMake(57, 10, 206, 32);
+        [morebutton setImage:[UIImage imageNamed:@"searchMore@2x.png"] forState:UIControlStateNormal];
+        [morebutton addTarget:self action:@selector(friendListclickmore) forControlEvents:UIControlEventTouchDown];
+        [footerview addSubview:morebutton];
+        return footerview;
+    }
+    return nil;
+}
+//本地加载更多
+-(void)listclickmore{
+    ;
+}
+//新浪加载更多
+-(void)sinaListclickmore{
+    ;
+}
+//玩伴加载更多
+-(void)friendListclickmore{
+    ;
+}
 -(void)dealloc{
     [super dealloc];
     [party release];
     [check_name release];
     [check_time release];
-    self.stateDictionary=nil;
+    [stateDictionary release];
+    [time release];
+    [choiceFriends release];
+    [sinaFriends release];
 }
 
 -(void)back

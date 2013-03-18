@@ -22,13 +22,16 @@
 {
     NSMutableArray* list;//好友列表
     NSMutableArray* playList;//玩伴列表
+    NSMutableArray* sinaList;//新浪好友列表
     
     NSIndexPath* lastIndexPath;
-    //UITableViewCell* Cell;
     NSMutableArray *choiceFriends;
-    int temp;
+    NSMutableArray *sinaFriends;
+    
+    
+    int temp;//记人数
     id <ContactCtrlDelegate>delegateFriend;
-    int spot;//识别
+    int spot;//识别从哪个界面传入
     
     NSString *from_p_id;
     
@@ -36,7 +39,7 @@
     
     NSString *userUUid;
     
-    int dataFlag;
+    int dataFlag;//标识获取提取接口
     
     CreatPartyViewController *party;
     
@@ -53,8 +56,6 @@
     
     NSMutableDictionary *stateDictionary;
 }
-
-@property (retain) NSMutableDictionary *stateDictionary;
 
 @property (nonatomic,retain) NSDate *time;
 @property  float lat;
@@ -74,7 +75,6 @@
 @property (strong,nonatomic) NSMutableArray* playList;
 
 @property (strong,nonatomic) NSIndexPath* lastIndexPath;
-//@property (strong,nonatomic) IBOutlet UITableViewCell* Cell;
 @property(nonatomic,retain)id <ContactCtrlDelegate>delegateFriend;
-@property (nonatomic,retain) NSMutableArray *choiceFriends;
+
 @end
