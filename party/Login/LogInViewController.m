@@ -210,7 +210,7 @@
         //NSLog(@"%@",response);
         NSError* error;
         NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
-        //NSLog(@"%@",bizDic);
+        NSLog(@"111111111111111%@",bizDic);
         self.dictory=bizDic;
         //=========将用户的UUid放入本地=============================================
         NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
