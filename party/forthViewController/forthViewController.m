@@ -29,6 +29,7 @@
         UITabBar *tabBar = self.tabBarController.tabBar;
         UITabBarItem *item1 = [tabBar.items objectAtIndex:3];
         [item1 setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedImage];
+        sinaFlag=1;
         //self.tabBarItem.image=[UIImage imageNamed:@"settings@2x.png"];
     }
     return self;
@@ -73,12 +74,14 @@
         NSDictionary* bizDic=[NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
         NSLog(@"1111111111111111guojiangwei %@",bizDic);
         if ([[bizDic objectForKey:@"status"] intValue]==300)  {
+            sinaFlag=1;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该新浪微博已经被绑定过" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
             [alert release];
         }
         else
         {
+            sinaFlag=1;
             [tableV reloadData];
         }
     }
@@ -235,7 +238,7 @@
     cell.backgroundColor=[UIColor clearColor];
     cell.textLabel.font=[UIFont systemFontOfSize:14];
     cell.textLabel.textColor=[UIColor lightGrayColor];
-    sinaFlag=1;//新浪标志位
+    //新浪标志位
     return cell;
 }
 
@@ -258,20 +261,26 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-    [self getUUidForthis];
-    NSString* str=[NSString stringWithFormat:@"mac/user/IF00030?uuid=%@",self.userUUid];
-    NSString *stringUrl=globalURL(str);
-    
-    NSURL* url=[NSURL URLWithString:stringUrl];
-    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-    request.delegate = self;
-    request.shouldAttemptPersistentConnection = NO;
-    [request setValidatesSecureCertificate:NO];
-    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-    [request setDidFailSelector:@selector(requestDidFailed:)];
-    [request startAsynchronous];
-    [super viewDidAppear:animated];
-    //[self.tableV reloadData];
+    if (sinaFlag==10) {
+        
+    }
+    else{
+        [self getUUidForthis];
+        NSString* str=[NSString stringWithFormat:@"mac/user/IF00030?uuid=%@",self.userUUid];
+        NSString *stringUrl=globalURL(str);
+        
+        NSURL* url=[NSURL URLWithString:stringUrl];
+        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+        request.delegate = self;
+        request.shouldAttemptPersistentConnection = NO;
+        [request setValidatesSecureCertificate:NO];
+        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+        [request setDidFailSelector:@selector(requestDidFailed:)];
+        [request startAsynchronous];
+        [super viewDidAppear:animated];
+        
+    }
+
 }
 //索引表
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
@@ -287,7 +296,7 @@
         //button.userInteractionEnabled=NO;
         button.frame=CGRectMake(244, 10, 46, 28);
         [_weiboSignIn signInOnViewController:self];
-        
+        sinaFlag=10;
     }
     else{
         btn.selected=NO;
