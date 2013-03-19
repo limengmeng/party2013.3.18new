@@ -44,19 +44,19 @@
         self.tableViewFri.backgroundColor=[UIColor clearColor];
         self.tableViewFri.delegate=self;
         self.tableViewFri.dataSource=self;
-        [self addSubview:self.tableViewFri];
+        [self addSubview:tableViewFri];
         //******************************右侧确认按钮 end************************************
         buttonAffirm=[UIButton buttonWithType:UIButtonTypeCustom];
         buttonAffirm.frame= CGRectMake(0, 6, 50, 31);
         buttonAffirm.backgroundColor=[UIColor clearColor];
         [buttonAffirm setBackgroundImage:[UIImage imageNamed:@"quxiao@2x.png"] forState:UIControlStateNormal];
-        [self addSubview:self.buttonAffirm];
+        [self addSubview:buttonAffirm];
         //========================================
         buttonCancel=[UIButton buttonWithType:UIButtonTypeCustom];
         buttonCancel.frame= CGRectMake(270, 6, 50, 31);
         buttonCancel.backgroundColor=[UIColor clearColor];
         [buttonCancel setBackgroundImage:[UIImage imageNamed:@"queding@2x.png"] forState:UIControlStateNormal];
-        [self addSubview:self.buttonCancel];
+        [self addSubview:buttonCancel];
         //===========获取系统给的数据=============================
         NSString* str=@"mac/user/IF00037";
         NSString* strURL=globalURL(str);

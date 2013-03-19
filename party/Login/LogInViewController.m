@@ -74,7 +74,7 @@
     imageView1.image=[UIImage imageNamed:@"ycomboLogin@2x.png"];
     imageView1.alpha=1;
     [self.view addSubview:imageView1];
-    [imageView1 release];
+    
     //********************************背景图片 end*******************************************
     
     //********************************背景图片*******************************************
@@ -84,7 +84,6 @@
     //NSLog(@"%g",mainscreenhight);
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer2) userInfo:nil repeats:NO];
     [self.view addSubview:imageView2];
-    [imageView2 release];
     //********************************背景图片 end*******************************************
     
     //********************************logo图片*******************************************
@@ -93,7 +92,6 @@
     imageView.backgroundColor=[UIColor clearColor];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer3) userInfo:nil repeats:NO];
     [self.view addSubview:imageView];
-    [imageView release];
     //********************************logo图片 end*******************************************
 }
 
@@ -858,6 +856,9 @@
 
 
 -(void)dealloc{
+    [imageView1 release];
+    [imageView2 release];
+    [imageView release];
     [loginView release];
     [resignView release];
     [photoView release];
