@@ -33,14 +33,12 @@
         [self addSubview:mailFiled];
         [mailFiled release];
         [self addSubview:field1];
-<<<<<<< HEAD
         [field1 release];
         NSLog(@"field1.retainCount=====%d",field1.retainCount);
 
         //*****************************注册或登录 end*************************************
-=======
+
         //*****************************注册或登录 反倒是end*************************************
->>>>>>> 的
         
         //*****************************密码*************************************
         field2=[[UITextField alloc]initWithFrame:CGRectMake(51, 78, 223, 40.5)];
