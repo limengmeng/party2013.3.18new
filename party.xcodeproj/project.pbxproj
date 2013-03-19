@@ -162,7 +162,6 @@
 		9DDE590316F6C631001988B0 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F716F6C631001988B0 /* ModalAlert.m */; };
 		9DDE590416F6C631001988B0 /* infoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE58F916F6C631001988B0 /* infoViewController.m */; };
 		9DDE590716F6C657001988B0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE590616F6C657001988B0 /* DetailViewController.m */; };
-		9DDE590A16F6C71B001988B0 /* secondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE590916F6C71B001988B0 /* secondViewController.m */; };
 		9DDE590D16F6DEA3001988B0 /* thirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDE590C16F6DEA2001988B0 /* thirdViewController.m */; };
 		9DEA6C2516DEF00D00E9BB53 /* passwordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA6C2416DEF00D00E9BB53 /* passwordViewController.m */; };
 		9DEE016416E75B7E00AE04FD /* secondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEE016216E75B7E00AE04FD /* secondViewController.xib */; };
@@ -343,6 +342,13 @@
 		DCCD466916ABC1CD001AA504 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCD466816ABC1CD001AA504 /* SystemConfiguration.framework */; };
 		DCCD466B16ABC1D9001AA504 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCD466A16ABC1D9001AA504 /* MobileCoreServices.framework */; };
 		DCCD466D16ABC1E2001AA504 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCD466C16ABC1E2001AA504 /* libz.1.2.5.dylib */; };
+		DCDA578516F8816600F39460 /* kaopu1da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA577F16F8816600F39460 /* kaopu1da@2x.png */; };
+		DCDA578616F8816600F39460 /* kaopu2da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA578016F8816600F39460 /* kaopu2da@2x.png */; };
+		DCDA578716F8816600F39460 /* quanbu1da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA578116F8816600F39460 /* quanbu1da@2x.png */; };
+		DCDA578816F8816600F39460 /* quanbu2da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA578216F8816600F39460 /* quanbu2da@2x.png */; };
+		DCDA578916F8816600F39460 /* wode1da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA578316F8816600F39460 /* wode1da@2x.png */; };
+		DCDA578A16F8816600F39460 /* wode2da@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDA578416F8816600F39460 /* wode2da@2x.png */; };
+		DCDA578E16F8817B00F39460 /* secondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDA578D16F8817B00F39460 /* secondViewController.m */; };
 		DCDEC7DF16BF580F00C4A5A3 /* PRfemale1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDEC7DE16BF580F00C4A5A3 /* PRfemale1@2x.png */; };
 		DCDEC7E116BF582700C4A5A3 /* PRmale1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCDEC7E016BF582700C4A5A3 /* PRmale1@2x.png */; };
 		DCDEC7E916BF5B9100C4A5A3 /* forthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDEC7E716BF5B9100C4A5A3 /* forthViewController.m */; };
@@ -559,8 +565,6 @@
 		9DDE58F916F6C631001988B0 /* infoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoViewController.m; sourceTree = "<group>"; };
 		9DDE590516F6C657001988B0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = "活动单个(1)/DetailViewController.h"; sourceTree = "<group>"; };
 		9DDE590616F6C657001988B0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = "活动单个(1)/DetailViewController.m"; sourceTree = "<group>"; };
-		9DDE590816F6C71B001988B0 /* secondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = secondViewController.h; sourceTree = "<group>"; };
-		9DDE590916F6C71B001988B0 /* secondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = secondViewController.m; sourceTree = "<group>"; };
 		9DDE590B16F6DEA2001988B0 /* thirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thirdViewController.h; sourceTree = "<group>"; };
 		9DDE590C16F6DEA2001988B0 /* thirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thirdViewController.m; sourceTree = "<group>"; };
 		9DEA6C2416DEF00D00E9BB53 /* passwordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = passwordViewController.m; sourceTree = "<group>"; };
@@ -781,6 +785,14 @@
 		DCCD466816ABC1CD001AA504 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DCCD466A16ABC1D9001AA504 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DCCD466C16ABC1E2001AA504 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		DCDA577F16F8816600F39460 /* kaopu1da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kaopu1da@2x.png"; sourceTree = "<group>"; };
+		DCDA578016F8816600F39460 /* kaopu2da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kaopu2da@2x.png"; sourceTree = "<group>"; };
+		DCDA578116F8816600F39460 /* quanbu1da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quanbu1da@2x.png"; sourceTree = "<group>"; };
+		DCDA578216F8816600F39460 /* quanbu2da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quanbu2da@2x.png"; sourceTree = "<group>"; };
+		DCDA578316F8816600F39460 /* wode1da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wode1da@2x.png"; sourceTree = "<group>"; };
+		DCDA578416F8816600F39460 /* wode2da@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wode2da@2x.png"; sourceTree = "<group>"; };
+		DCDA578C16F8817B00F39460 /* secondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = secondViewController.h; sourceTree = "<group>"; };
+		DCDA578D16F8817B00F39460 /* secondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = secondViewController.m; sourceTree = "<group>"; };
 		DCDEC7DE16BF580F00C4A5A3 /* PRfemale1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PRfemale1@2x.png"; sourceTree = "<group>"; };
 		DCDEC7E016BF582700C4A5A3 /* PRmale1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PRmale1@2x.png"; sourceTree = "<group>"; };
 		DCDEC7E616BF5B9100C4A5A3 /* forthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forthViewController.h; sourceTree = "<group>"; };
@@ -1435,8 +1447,8 @@
 				DCC8FBFE16BE6C760044E24D /* PR */,
 				DCC8FC0D16BE6C760044E24D /* PsearchMore@2x.png */,
 				DCC8FC1116BE6C760044E24D /* Secondimage */,
-				9DDE590816F6C71B001988B0 /* secondViewController.h */,
-				9DDE590916F6C71B001988B0 /* secondViewController.m */,
+				DCDA578C16F8817B00F39460 /* secondViewController.h */,
+				DCDA578D16F8817B00F39460 /* secondViewController.m */,
 				9DEE016216E75B7E00AE04FD /* secondViewController.xib */,
 				9DF85D1416E5CA560046C297 /* TwoViewController.h */,
 				9DF85D1516E5CA560046C297 /* TwoViewController.m */,
@@ -1511,6 +1523,12 @@
 				DCC8FC1B16BE6C760044E24D /* 创建者按下.png */,
 				DCC8FC1C16BE6C760044E24D /* 参与者.png */,
 				DCC8FC1D16BE6C760044E24D /* 参与者按下.png */,
+				DCDA577F16F8816600F39460 /* kaopu1da@2x.png */,
+				DCDA578016F8816600F39460 /* kaopu2da@2x.png */,
+				DCDA578116F8816600F39460 /* quanbu1da@2x.png */,
+				DCDA578216F8816600F39460 /* quanbu2da@2x.png */,
+				DCDA578316F8816600F39460 /* wode1da@2x.png */,
+				DCDA578416F8816600F39460 /* wode2da@2x.png */,
 			);
 			path = Secondimage;
 			sourceTree = "<group>";
@@ -1869,6 +1887,12 @@
 				9DDE58FC16F6C631001988B0 /* CreatPartyViewController.xib in Resources */,
 				9DDE58FE16F6C631001988B0 /* SelectCheck@2x.png in Resources */,
 				9DDE590216F6C631001988B0 /* InvitViewController.xib in Resources */,
+				DCDA578516F8816600F39460 /* kaopu1da@2x.png in Resources */,
+				DCDA578616F8816600F39460 /* kaopu2da@2x.png in Resources */,
+				DCDA578716F8816600F39460 /* quanbu1da@2x.png in Resources */,
+				DCDA578816F8816600F39460 /* quanbu2da@2x.png in Resources */,
+				DCDA578916F8816600F39460 /* wode1da@2x.png in Resources */,
+				DCDA578A16F8816600F39460 /* wode2da@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1955,13 +1979,13 @@
 				9DDE590316F6C631001988B0 /* ModalAlert.m in Sources */,
 				9DDE590416F6C631001988B0 /* infoViewController.m in Sources */,
 				9DDE590716F6C657001988B0 /* DetailViewController.m in Sources */,
-				9DDE590A16F6C71B001988B0 /* secondViewController.m in Sources */,
 				9DDE590D16F6DEA3001988B0 /* thirdViewController.m in Sources */,
 				52D2DDC416F6F49C0088AE22 /* CheckOneViewController.m in Sources */,
 				52D2DDC516F6F49C0088AE22 /* CreatPartyViewController.m in Sources */,
 				52D2DDCC16F6F4C90088AE22 /* MapViewController.m in Sources */,
 				52D2DDCD16F6F4C90088AE22 /* CreatBeforeViewController.m in Sources */,
 				52D2DDCE16F6F4C90088AE22 /* InvitViewController.m in Sources */,
+				DCDA578E16F8817B00F39460 /* secondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

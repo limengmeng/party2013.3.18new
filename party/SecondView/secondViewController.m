@@ -23,13 +23,14 @@
     if (self) {
         // Custom initialization
         //self.title=@"活动";
+        ChoseNum=1;
         Allparty=[UIButton buttonWithType:UIButtonTypeCustom];
         Allparty.frame=CGRectMake(0, 0, 103, 23);
         [Allparty setImage:[UIImage imageNamed:@"quanbu1da@2x.png"] forState:UIControlStateNormal];
         [Allparty setImage:[UIImage imageNamed:@"quanbu2da@2x.png"] forState:UIControlStateSelected];
         [Allparty setSelected:YES];
         [self.view addSubview:Allparty];
-        
+        self.userUUid=@"10002";
         ReliableParty=[UIButton buttonWithType:UIButtonTypeCustom];
         ReliableParty.frame=CGRectMake(103, 0, 114, 23);
         [ReliableParty setImage:[UIImage imageNamed:@"kaopu1da@2x.png"] forState:UIControlStateNormal];
@@ -165,7 +166,7 @@
         [request setValidatesSecureCertificate:NO];
         [request setDefaultResponseEncoding:NSUTF8StringEncoding];
         [request setDidFailSelector:@selector(requestDidFailed:)];
-        //[request startAsynchronous];
+        [request startAsynchronous];
     }
 }
 
@@ -198,7 +199,6 @@
 {
     [super viewDidLoad];
     flag=0;
-    sumArray =[[NSMutableArray alloc]init];
     // Do any additional setup after loading the view from its nib.
     sumArray=[[NSMutableArray alloc]init];
     
@@ -294,53 +294,107 @@
     //中断之前的网络请求
 	NSLog(@"segmentedControl %i did select index %i (via UIControl method)", segmentedControl.tag, segmentedControl.selectedIndex);
     flag=0;
+   
     if (segmentedControl.selectedIndex==0) {
         segmentNum=0;
         [self.tableViewParty reloadData];
         self.tableViewParty.contentOffset=CGPointMake(0.0, 0.0);
-       
-        flag=0;
-        locationMamager=[[CLLocationManager alloc]init];
-        //设置委托
-        locationMamager.delegate=self;
-        //设置精度为最优
-        locationMamager.desiredAccuracy=kCLLocationAccuracyBest;
-        //设置距离筛选器
-        locationMamager.distanceFilter=100.0f;
-        locationMamager.headingFilter=0.1;
-        //开始更新数据
-        [locationMamager startUpdatingLocation];
-        [locationMamager startUpdatingHeading];
+        if (ChoseNum==1) {
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+            NSString* strURL=globalURL(str);
+            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+            NSURL* url=[NSURL URLWithString:strURL];
+            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+            request.delegate = self;
+            request.shouldAttemptPersistentConnection = NO;
+            [request setValidatesSecureCertificate:NO];
+            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+            [request setDidFailSelector:@selector(requestDidFailed:)];
+            [request startAsynchronous];  
+        }
+        else
+        {
+            if (ChoseNum==2) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"靠谱派对，距离排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
 
-        NSLog(@"经纬度输出：%f,%f",self.lat,self.lng);
-        NSLog(@"用户uuid%@",self.userUUid);
-        NSString* str=@"mac/party/IF00001";
-        NSString* strURL=globalURL(str);
-        NSURL *url=[NSURL URLWithString:strURL];
-        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-        [rrequest setPostValue:self.userUUid forKey: @"uuid"];
-        [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lat] forKey:@"lat"];
-        [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lng] forKey:@"lng"];
-        [rrequest setDelegate:self];
-        [rrequest startAsynchronous];
-       
+            }
+            else
+            {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"我的派对，距离排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+
+            }
+        }
     }
     if (segmentedControl.selectedIndex==1) {
         self.tableViewParty.contentOffset=CGPointMake(0.0, 0.0);
         segmentNum=1;
         [self.tableViewParty reloadData];
         flag=0;
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00001?uuid=%@",userUUid];
-        NSString *stringUrl=globalURL(str);
-        NSLog(@"接口1：：：：%@",stringUrl);
-        NSURL* url=[NSURL URLWithString:stringUrl];
-        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-        request.delegate = self;
-        request.shouldAttemptPersistentConnection = NO;
-        [request setValidatesSecureCertificate:NO];
-        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-        [request setDidFailSelector:@selector(requestDidFailed:)];
-        [request startAsynchronous];
+        if(ChoseNum==1)
+        {
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+            NSString* strURL=globalURL(str);
+            NSLog(@"全部派对,按照最新时间排序:%@",strURL);
+            NSURL* url=[NSURL URLWithString:strURL];
+            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+            request.delegate = self;
+            request.shouldAttemptPersistentConnection = NO;
+            [request setValidatesSecureCertificate:NO];
+            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+            [request setDidFailSelector:@selector(requestDidFailed:)];
+            [request startAsynchronous];
+        }
+        else
+            if (ChoseNum==2) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"靠谱派对，时间排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+
+            }
+        else
+        {
+            if (ChoseNum==3) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"我的派对，时间排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+            }
+        }
     }
 }
 -(void)requestDidFailed:(ASIHTTPRequest *)request
@@ -408,10 +462,8 @@
     mapControl=[[MapViewController alloc]init];
     mapControl.title=@"创建派对地点";
     mapControl.type=@"1";
-    mapControl.map_Temp=1;
     [self.navigationController pushViewController:mapControl animated:YES];
     [mapControl release];
-    
     //[self.tabBarController.view addSubview:creatPartyViewController.view];
 }
 
@@ -582,7 +634,7 @@
     }
        
     lable7.text=[dict objectForKey:@"P_TITLE"];
-    NSMutableString *mutableStringLocal=[[NSMutableString alloc] initWithFormat:@"%@",[dict objectForKey:@"P_DISTANCEC"]];
+    NSMutableString *mutableStringLocal=[[NSMutableString alloc] initWithFormat:@"%@",[dict objectForKey:@"P_DISTANCE"]];
     lable2.text=mutableStringLocal;
     [mutableStringLocal release];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -706,7 +758,7 @@
 -(void)PartyClickMore
 {
     flag=1;
-    NSLog(@"本次返回的数量:%d",total);
+    NSLog(@"加载更多，本次返回的数量:%d",total);
     if (total<mytotal) {
         //返回的结果已经是所有的了，不需要在加载
         UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"加载完毕" message:@"所有数据已经加载完毕" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
@@ -716,32 +768,102 @@
     else{
         if (segmentNum==0) {
             //加载更多,附近
-            NSString* str=@"mac/party/IF00001";
-            NSString* strURL=globalURL(str);
-            NSURL *url=[NSURL URLWithString:strURL];
-            ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-            [rrequest setPostValue:self.userUUid forKey: @"uuid"];
-            [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lat] forKey:@"lat"];
-            [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lng] forKey:@"lng"];
-            [rrequest setPostValue:[NSString stringWithFormat:@"%d",[self.sumArray count]+1]  forKey:@"from"];
-            [rrequest setDelegate:self];
-            [rrequest startAsynchronous];
+            if (ChoseNum==1) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                NSString* strURL=globalURL(str);
+                NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+
+            }
+            else
+            {
+                if (ChoseNum==2) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                    NSString* strURL=globalURL(str);
+                    NSLog(@"靠谱派对，距离排序:%@",strURL);
+                    NSURL* url=[NSURL URLWithString:strURL];
+                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                    request.delegate = self;
+                    request.shouldAttemptPersistentConnection = NO;
+                    [request setValidatesSecureCertificate:NO];
+                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                    [request setDidFailSelector:@selector(requestDidFailed:)];
+                    [request startAsynchronous];
+
+                }
+                else
+                    if (ChoseNum==3) {
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                        NSString* strURL=globalURL(str);
+                        NSLog(@"我的派对，距离排序:%@",strURL);
+                        NSURL* url=[NSURL URLWithString:strURL];
+                        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                        request.delegate = self;
+                        request.shouldAttemptPersistentConnection = NO;
+                        [request setValidatesSecureCertificate:NO];
+                        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                        [request setDidFailSelector:@selector(requestDidFailed:)];
+                        [request startAsynchronous];
+                    }
+            }
         }
         else
         {
             //加载更多，所有
-            [self getUUidForthis];
-            NSString* str=[NSString stringWithFormat:@"mac/party/IF00001?uuid=%@&&from=%d",userUUid,[self.sumArray count]+1];
-            NSString *stringUrl=globalURL(str);
-            NSLog(@"加载更多:%@",stringUrl);
-            NSURL* url=[NSURL URLWithString:stringUrl];
-            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-            request.delegate = self;
-            request.shouldAttemptPersistentConnection = NO;
-            [request setValidatesSecureCertificate:NO];
-            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-            [request setDidFailSelector:@selector(requestDidFailed:)];
-            [request startAsynchronous];
+            
+            //加载更多,附近
+            if (ChoseNum==1) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                NSString* strURL=globalURL(str);
+                NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+            else
+            {
+                if (ChoseNum==2) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                    NSString* strURL=globalURL(str);
+                    NSLog(@"靠谱派对，距离排序:%@",strURL);
+                    NSURL* url=[NSURL URLWithString:strURL];
+                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                    request.delegate = self;
+                    request.shouldAttemptPersistentConnection = NO;
+                    [request setValidatesSecureCertificate:NO];
+                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                    [request setDidFailSelector:@selector(requestDidFailed:)];
+                    [request startAsynchronous];
+                    
+                }
+                else
+                    if (ChoseNum==3) {
+                        NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066&&from=%d",userUUid,self.sumArray.count+1];
+                        NSString* strURL=globalURL(str);
+                        NSLog(@"我的派对，距离排序:%@",strURL);
+                        NSURL* url=[NSURL URLWithString:strURL];
+                        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                        request.delegate = self;
+                        request.shouldAttemptPersistentConnection = NO;
+                        [request setValidatesSecureCertificate:NO];
+                        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                        [request setDidFailSelector:@selector(requestDidFailed:)];
+                        [request startAsynchronous];
+                    }
+            }
         }
         
     }
@@ -756,7 +878,7 @@
     twoViewController.p_id=[dict objectForKey:@"P_ID"];
     NSLog(@"pidqqqqqqqqqqqqqqqqqqqqqqq%@",twoViewController.p_id);
     [self.navigationController pushViewController:twoViewController animated:YES];
-    //
+    [twoViewController release];
 }
 - (void)viewDidUnload
 {
@@ -784,31 +906,106 @@
 {
     flag=0;
     //====================获取数据================================
-    if (segmentNum==1) {
-        NSString* str=[NSString stringWithFormat:@"mac/party/IF00001?uuid=%@",userUUid];
-        NSString *stringUrl=globalURL(str);
-        NSURL* url=[NSURL URLWithString:stringUrl];
-        ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
-        request.delegate = self;
-        request.shouldAttemptPersistentConnection = NO;
-        [request setValidatesSecureCertificate:NO];
-        [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-        [request setDidFailSelector:@selector(requestDidFailed:)];
-        [request startAsynchronous];
-        
-    }
     if (segmentNum==0) {
-        NSString* str=@"mac/party/IF00001";
-        NSString* strURL=globalURL(str);
-        NSURL *url=[NSURL URLWithString:strURL];
-        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
-        [rrequest setPostValue:self.userUUid forKey: @"uuid"];
-        [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lat] forKey:@"lat"];
-        [rrequest setPostValue:[NSString stringWithFormat:@"%f",self.lng] forKey:@"lng"];
-        [rrequest setDelegate:self];
-        [rrequest startAsynchronous];
-        
+        //加载更多,附近
+        if (ChoseNum==1) {
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+            NSString* strURL=globalURL(str);
+            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+            NSURL* url=[NSURL URLWithString:strURL];
+            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+            request.delegate = self;
+            request.shouldAttemptPersistentConnection = NO;
+            [request setValidatesSecureCertificate:NO];
+            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+            [request setDidFailSelector:@selector(requestDidFailed:)];
+            [request startAsynchronous];
+            
+        }
+        else
+        {
+            if (ChoseNum==2) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"靠谱派对，距离排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+            else
+                if (ChoseNum==3) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=1&&lat=39.972946&&lng=116.407066",userUUid];
+                    NSString* strURL=globalURL(str);
+                    NSLog(@"我的派对，距离排序:%@",strURL);
+                    NSURL* url=[NSURL URLWithString:strURL];
+                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                    request.delegate = self;
+                    request.shouldAttemptPersistentConnection = NO;
+                    [request setValidatesSecureCertificate:NO];
+                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                    [request setDidFailSelector:@selector(requestDidFailed:)];
+                    [request startAsynchronous];
+                }
+        }
     }
+    else
+    {
+        //加载更多，所有
+        
+        //加载更多,附近
+        if (ChoseNum==1) {
+            NSString* str=[NSString stringWithFormat:@"mac/party/IF00101?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+            NSString* strURL=globalURL(str);
+            NSLog(@"全部派对，按照附近距离排序：%@",strURL);
+            NSURL* url=[NSURL URLWithString:strURL];
+            ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+            request.delegate = self;
+            request.shouldAttemptPersistentConnection = NO;
+            [request setValidatesSecureCertificate:NO];
+            [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+            [request setDidFailSelector:@selector(requestDidFailed:)];
+            [request startAsynchronous];
+            
+        }
+        else
+        {
+            if (ChoseNum==2) {
+                NSString* str=[NSString stringWithFormat:@"mac/party/IF00102?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                NSString* strURL=globalURL(str);
+                NSLog(@"靠谱派对，距离排序:%@",strURL);
+                NSURL* url=[NSURL URLWithString:strURL];
+                ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                request.delegate = self;
+                request.shouldAttemptPersistentConnection = NO;
+                [request setValidatesSecureCertificate:NO];
+                [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                [request setDidFailSelector:@selector(requestDidFailed:)];
+                [request startAsynchronous];
+                
+            }
+            else
+                if (ChoseNum==3) {
+                    NSString* str=[NSString stringWithFormat:@"mac/party/IF00103?uuid=%@&&sort=2&&lat=39.972946&&lng=116.407066",userUUid];
+                    NSString* strURL=globalURL(str);
+                    NSLog(@"我的派对，距离排序:%@",strURL);
+                    NSURL* url=[NSURL URLWithString:strURL];
+                    ASIHTTPRequest* request=[ASIHTTPRequest requestWithURL:url];
+                    request.delegate = self;
+                    request.shouldAttemptPersistentConnection = NO;
+                    [request setValidatesSecureCertificate:NO];
+                    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+                    [request setDidFailSelector:@selector(requestDidFailed:)];
+                    [request startAsynchronous];
+                }
+        }
+    }
+
     [_slimeView performSelector:@selector(endRefresh)
                      withObject:nil afterDelay:3
                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
@@ -848,10 +1045,12 @@
 -(void)dealloc
 {
     [super dealloc];
-    //[mapControl release];
-    [twoViewController release];
+    [sumArray release];
+    [self.userUUid release];
+    [_slimeView release];
+    [self.tableViewParty release];
     [creatPartyViewController release];
-    //[grayRC release];
-    //[segmentBar release];
+    [grayRC release];
+    [segmentBar release];
 }
 @end
