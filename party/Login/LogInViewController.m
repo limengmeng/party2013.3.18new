@@ -627,7 +627,7 @@
         [request setDefaultResponseEncoding:NSUTF8StringEncoding];
         //[request setDidFailSelector:@selector(requestDidFailed:)];
         [request startAsynchronous];
-            }
+    }
 }
 -(void)affirm{
     

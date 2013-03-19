@@ -410,8 +410,7 @@
     mapControl.type=@"1";
     mapControl.map_Temp=1;
     [self.navigationController pushViewController:mapControl animated:YES];
-
-    //[mapControl release];
+    [mapControl release];
     
     //[self.tabBarController.view addSubview:creatPartyViewController.view];
 }
@@ -849,7 +848,7 @@
 -(void)dealloc
 {
     [super dealloc];
-    [mapControl release];
+    //[mapControl release];
     [twoViewController release];
     [creatPartyViewController release];
     //[grayRC release];

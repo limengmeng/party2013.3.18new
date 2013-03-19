@@ -113,6 +113,7 @@ int flag=0;
     //map的userlocation在这个方法里才开始获得
    NSLog(@"自己的位置::::%f,%f",map.userLocation.coordinate.latitude,map.userLocation.coordinate.longitude);
 
+    NSLog(@"地图flag=%d",flag);
     if (flag==0) {
         float zoomLevel = 0.01;
         MKCoordinateRegion region = MKCoordinateRegionMake(map.userLocation.coordinate,MKCoordinateSpanMake(zoomLevel, zoomLevel));

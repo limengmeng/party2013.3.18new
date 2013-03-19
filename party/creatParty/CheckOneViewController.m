@@ -252,7 +252,6 @@ NSInteger prerow=-1;
 
 #pragma mark - Table view data source
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.spot==2) {
@@ -276,7 +275,8 @@ NSInteger prerow=-1;
 //******************************section标题************************************
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView* customView = [[[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)] autorelease];
+    UIImageView *image= [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 0.0, 320, 20)];
+    //[image setImage:[UIImage imageNamed:@"enter@2x.png"]];
     UILabel * headerLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     headerLabel.backgroundColor = [UIColor clearColor];
     headerLabel.opaque = NO;
@@ -286,29 +286,19 @@ NSInteger prerow=-1;
     headerLabel.font = [UIFont boldSystemFontOfSize:12];
     headerLabel.frame = CGRectMake(10.0, 0.0, 300.0, 44.0);
     if(section==0){
-//        if(self.spot==1||self.spot==3||self.spot==4)
-//            headerLabel.text =  @"";
-//        else
-            headerLabel.text =  @"好友列表";
+        headerLabel.text =  @"好友列表";
     }
     if(section==1)
         headerLabel.text=@"新浪互粉";
     if(section==2)
         headerLabel.text = @"玩伴列表";
-    [customView addSubview:headerLabel];
-    return customView;
+    [image addSubview:headerLabel];
+    return image;
 }
 //******************************section标题 end************************************
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(section==0){
-        if(self.spot==1||self.spot==3||self.spot==4)
-            return 0;
-        else
-            return 40;
-    }
-    else
-        return 40;
+    return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -451,14 +441,16 @@ NSInteger prerow=-1;
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    if(cell.accessoryType==UITableViewCellAccessoryCheckmark){
-        //************************添加对勾************************************
-        UIImage *image= [UIImage   imageNamed:@"checkcell@2x.png"];
-        CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-        button.frame = frame;
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor clearColor];
-        cell.accessoryView=button;
+    if(self.spot!=3){
+        if(cell.accessoryType==UITableViewCellAccessoryCheckmark){
+            //************************添加对勾************************************
+            UIImage *image= [UIImage   imageNamed:@"checkcell@2x.png"];
+            CGRect frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+            button.frame = frame;
+            [button setBackgroundImage:image forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor clearColor];
+            cell.accessoryView=button;
+        }
     }
     return cell;
 }
@@ -470,20 +462,6 @@ NSInteger prerow=-1;
 	UITableViewCell *newcell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSString *key = [@"Row " stringByAppendingFormat:@"%d,%d",indexPath.section,indexPath.row];
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-	// Created an inverted value and store it
-	BOOL isChecked = !([[stateDictionary objectForKey:key] boolValue]);
-    
-    
-	NSNumber *checked = [NSNumber numberWithBool:isChecked];
-    
-    
-	[stateDictionary setObject:checked forKey:key];
-	
-    
-	// Update the cell accessory checkmark
-	newcell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
-    
     
     //******************************查看好友详细信息************************************
     if (spot==3) {
@@ -502,6 +480,19 @@ NSInteger prerow=-1;
     }
     //******************************查看好友详细信息 end************************************
     else{
+        // Created an inverted value and store it
+        BOOL isChecked = !([[stateDictionary objectForKey:key] boolValue]);
+        
+        
+        NSNumber *checked = [NSNumber numberWithBool:isChecked];
+        
+        
+        [stateDictionary setObject:checked forKey:key];
+        
+        
+        // Update the cell accessory checkmark
+        newcell.accessoryType = isChecked ? UITableViewCellAccessoryCheckmark :  UITableViewCellAccessoryNone;
+
         if(newcell.accessoryType==UITableViewCellAccessoryCheckmark){
             if (temp<5) {
                 //if(newcell.accessoryType=UITableViewCellAccessoryCheckmark){
@@ -573,6 +564,8 @@ NSInteger prerow=-1;
     
     party.from_P_type=self.type;
     
+    party.from_C_id=self.from_c_id;
+    
     party.P_title=self.check_name;
     
     party.P_time=self.check_time;
@@ -632,6 +625,10 @@ NSInteger prerow=-1;
     }else
         return UITableViewCellEditingStyleNone;
 	//不能是UITableViewCellEditingStyleNone
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -713,6 +710,7 @@ NSInteger prerow=-1;
     [time release];
     [choiceFriends release];
     [sinaFriends release];
+    [from_c_id release];
 }
 
 -(void)back

@@ -591,6 +591,7 @@
     [P_info release];
     [P_local release];
     [sinaArr release];
+    [from_C_id release];
     [super dealloc];
 }
 

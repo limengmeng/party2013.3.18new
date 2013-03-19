@@ -227,6 +227,8 @@
         
         friendList.time=time;
         
+        friendList.from_c_id=self.c_id;
+        
         NSLog(@"传值。。。。。====%@",friendList.time);
 
          NSLog(@"传值。。。。。====%@,%@",friendList.check_name,friendList.check_time);
