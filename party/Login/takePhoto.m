@@ -9,7 +9,7 @@
 #import "takePhoto.h"
 
 @implementation takePhoto
-@synthesize labelName,imgView,button1,button2,photoImg;
+@synthesize imgView,button1,button2;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,19 +17,21 @@
     if (self) {
         // Initialization code
         //*****************************标题*************************************
-        self.labelName=[[[UILabel alloc]initWithFrame:CGRectMake(118, 9, 100, 44)]autorelease];
+        labelName=[[UILabel alloc]initWithFrame:CGRectMake(118, 9, 100, 44)];
         labelName.text=@"上传照片";
         labelName.textColor=[UIColor redColor];
         labelName.font=[UIFont systemFontOfSize:20];
-        self.labelName.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.labelName];
+        labelName.backgroundColor=[UIColor clearColor];
+        [self addSubview:labelName];
+        [labelName release];
         //*****************************标题 end*************************************
         
         //*****************************照片*************************************
-        self.imgView=[[[UIImageView alloc]initWithFrame:CGRectMake(28, 70, 268, 268)]autorelease];
-        self.imgView.image=[UIImage imageNamed:@"photo@2x.png"];
-        self.imgView.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.imgView];
+        imgView=[[UIImageView alloc]initWithFrame:CGRectMake(28, 70, 268, 268)];
+        imgView.image=[UIImage imageNamed:@"photo@2x.png"];
+        imgView.backgroundColor=[UIColor clearColor];
+        [self addSubview:imgView];
+        [imgView release];
         
         //*****************************照片 end**********************************
         
@@ -39,7 +41,7 @@
         button1.backgroundColor=[UIColor clearColor];
         [button1 setBackgroundImage:[UIImage imageNamed:@"back@2x.png"] forState:UIControlStateNormal];
         [button1 setBackgroundImage:[UIImage imageNamed:@"backanxia@2x.png"] forState:UIControlStateSelected];
-        [self addSubview:self.button1];
+        [self addSubview:button1];
         //*****************************返回按钮 end*************************************
         
         //*****************************确定按钮*************************************
@@ -47,7 +49,7 @@
         button2.frame=CGRectMake(28, 356, 266.5, 39);
         button2.backgroundColor=[UIColor clearColor];
         [button2 setBackgroundImage:[UIImage imageNamed:@"button@2x.png"] forState:UIControlStateNormal];
-        [self addSubview:self.button2];
+        [self addSubview:button2];
         //*****************************确定按钮 end*************************************
     }
     return self;
@@ -64,6 +66,9 @@
 -(void)dealloc
 {
     [super dealloc];
+    [imgView release];
+    [button1 release];
+    [button2 release];
 }
 
 @end

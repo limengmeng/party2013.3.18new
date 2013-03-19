@@ -78,8 +78,4 @@
 
 @property (nonatomic,retain) takePhoto *photoView;
 
-@property (nonatomic,retain) UIImageView *imageView1;
-@property (nonatomic,retain) UIImageView *imageView;
-@property (nonatomic,retain) UIImageView *imageView2;
-
 @end

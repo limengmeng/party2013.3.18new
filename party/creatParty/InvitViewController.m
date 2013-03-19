@@ -248,6 +248,37 @@
 }
 
 -(void)sendData{
+//    //上传联合互粉的相关信息
+//    for (int i=0; i<[sinaArray count]; i++) {
+//        NSString* str=@"servlet/reg";
+//        NSString* strURL=globalURL(str);
+//        NSURL* url=[NSURL URLWithString:strURL];
+//        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
+//        
+//        //NSLog(@"mail==%@",self.mail);
+//        //NSLog(@"mail.pass====%@",self.mail_pass);
+//        //NSLog(@"self.user_nick====%@",self.user_nick);
+//        //NSLog(@"self.user_sex====%@",self.user_sex);
+//        //NSLog(@"self.user_pic====%@",self.user_pic);
+//        //NSLog(@"self.user_age====%@",self.user_age);
+//        NSMutableString* filename=[[NSMutableString alloc]init];
+//        [filename appendFormat:@"a___%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"id"]];
+//        [filename appendFormat:@"b___%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"name"]];
+//        [filename appendFormat:@"c___%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"avatar_large"]];
+//        [filename appendFormat:@"d___%@",[[self.sinaArray objectAtIndex:i] objectForKey:@"gender"]];
+//        [filename appendFormat:@"e___%@f___.jpg",[[self.sinaArray objectAtIndex:i] objectForKey:@"location"]];
+//        
+//        UIImage* image=[[self.sinaArray objectAtIndex:i] objectForKey:@"avatar_large"];
+//        NSData *imageData=UIImageJPEGRepresentation(image, 0.1);
+//        //压缩
+//        [rrequest  addData:imageData withFileName:filename andContentType:@"image/jpeg" forKey:@"user_pic"];
+//        [rrequest setDelegate:self];
+//        [rrequest startAsynchronous];
+//        //NSLog(@"filename===%@",filename);
+//        [filename release];
+//    }
+    
+    //上传派对相关信息
     dispatch_async(dispatch_get_global_queue(0, 0),
                    ^{
                        NSString* str=@"mac/party/IF00051";
@@ -255,7 +286,7 @@
                        NSURL* url=[NSURL URLWithString:strURL];
                        ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
                        
-                       NSLog(@"%@",self.friendId);
+                       NSLog(@"self.sinaArray=====%@",self.sinaArray);
                        
                        NSMutableString *stringFriId=[[NSMutableString alloc]init];
                        

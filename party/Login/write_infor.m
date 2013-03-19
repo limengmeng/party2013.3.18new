@@ -9,8 +9,7 @@
 #import "write_infor.h"
 
 @implementation write_infor
-@synthesize field1,field2,button1,button2,button3,labelName,button4;
-@synthesize age,sex,nick;
+@synthesize field1,field2,button1,button2,button3,button4;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,8 +20,9 @@
         labelName.text=@"填写资料";
         labelName.textColor=[UIColor redColor];
         labelName.font=[UIFont systemFontOfSize:20];
-        self.labelName.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.labelName];
+        labelName.backgroundColor=[UIColor clearColor];
+        [self addSubview:labelName];
+        [labelName release];
         //*****************************标题 end*************************************
         
         //*****************************用户名*************************************
@@ -42,6 +42,7 @@
         [self addSubview:mailFiled1];
         [self addSubview:self.field1];
         [mailFiled1 release];
+        [field1 release];
         
         //*****************************用户名 end*************************************
         
@@ -61,6 +62,7 @@
         mailFiled2.background = [UIImage imageNamed:@"import@2x.png"];
         [self addSubview:mailFiled2];
         [self addSubview:self.field2];
+        [field2 release];
         [mailFiled2 release];
         
         //*****************************年龄 end*************************************
@@ -75,7 +77,7 @@
         button1.tag=102;
         button1.selected = YES;
         button1.titleLabel.font=[UIFont systemFontOfSize:15];
-        [self addSubview:self.button1];
+        [self addSubview:button1];
         //*****************************男按钮 end*************************************
         
         //*****************************女按钮*************************************
@@ -84,18 +86,18 @@
         button2.backgroundColor=[UIColor clearColor];
         [button2 setBackgroundImage:[UIImage imageNamed:@"loginFemale.png"] forState:UIControlStateNormal];
         [button2 setBackgroundImage:[UIImage imageNamed:@"loginFemaleing.png"] forState:UIControlStateSelected];
-        self.button2.tag=103;
-        [self.button2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.button2];
+        button2.tag=103;
+        [button2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button2];
         //*****************************女按钮 end*************************************
         
         //*****************************确认按钮*************************************
         button3=[UIButton buttonWithType:UIButtonTypeCustom];
         button3.frame=CGRectMake(168, 170, 125, 39);
-        self.button3.backgroundColor=[UIColor clearColor];
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"loginyes@2x.png"] forState:UIControlStateNormal];
-        [self.button3 setBackgroundImage:[UIImage imageNamed:@"loginyesing.png"] forState:UIControlStateSelected];
-        [self addSubview:self.button3];
+        button3.backgroundColor=[UIColor clearColor];
+        [button3 setBackgroundImage:[UIImage imageNamed:@"loginyes@2x.png"] forState:UIControlStateNormal];
+        [button3 setBackgroundImage:[UIImage imageNamed:@"loginyesing.png"] forState:UIControlStateSelected];
+        [self addSubview:button3];
         //*****************************确认按钮 end*************************************
         
         //*****************************返回按钮*************************************
@@ -104,7 +106,7 @@
         button4.backgroundColor=[UIColor clearColor];
         [button4 setBackgroundImage:[UIImage imageNamed:@"back@2x.png"] forState:UIControlStateNormal];
         [button4 setBackgroundImage:[UIImage imageNamed:@"backanxia@2x.png"] forState:UIControlStateSelected];
-        [self addSubview:self.button4];
+        [self addSubview:button4];
         //*****************************返回按钮 end*************************************
     }
     return self;
@@ -125,17 +127,14 @@
         otherButton.selected = NO;
     }
 }
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+
 -(void)dealloc
 {
     [super dealloc];
+    [button1 release];
+    [button2 release];
+    [button3 release];
+    [button4 release];
     [field1 release];
     [field2 release];
     [labelName release];

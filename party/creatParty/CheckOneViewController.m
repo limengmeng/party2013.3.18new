@@ -191,6 +191,7 @@ NSInteger prerow=-1;
     [request setDefaultResponseEncoding:NSUTF8StringEncoding];
     //[request setDidFailSelector:@selector(requestDidFailed:)];
     [request startAsynchronous];
+    [weiboShare release];
 
 }
 

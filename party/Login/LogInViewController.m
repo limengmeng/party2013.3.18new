@@ -28,9 +28,6 @@
 @synthesize dateToolbar;
 @synthesize resignView,loginView,infodoneView,infowriteView;
 @synthesize photoView;
-@synthesize imageView1;
-@synthesize imageView;
-@synthesize imageView2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,6 +74,7 @@
     imageView1.image=[UIImage imageNamed:@"ycomboLogin@2x.png"];
     imageView1.alpha=1;
     [self.view addSubview:imageView1];
+    [imageView1 release];
     //********************************背景图片 end*******************************************
     
     //********************************背景图片*******************************************
@@ -86,6 +84,7 @@
     //NSLog(@"%g",mainscreenhight);
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer2) userInfo:nil repeats:NO];
     [self.view addSubview:imageView2];
+    [imageView2 release];
     //********************************背景图片 end*******************************************
     
     //********************************logo图片*******************************************
@@ -94,6 +93,7 @@
     imageView.backgroundColor=[UIColor clearColor];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer3) userInfo:nil repeats:NO];
     [self.view addSubview:imageView];
+    [imageView release];
     //********************************logo图片 end*******************************************
 }
 
@@ -459,7 +459,7 @@
 }
 -(void)resignDate{
     numberSum=3;
-    NSString* str=@"servlet/reg";
+    NSString* str=@"mac/user/IF00034";
     NSString* strURL=globalURL(str);
     NSURL* url=[NSURL URLWithString:strURL];
     ASIFormDataRequest *rrequest =  [ASIFormDataRequest  requestWithURL:url];
@@ -801,9 +801,8 @@
 {
 	//[picker dismissModalViewControllerAnimated:YES];
     [picker dismissViewControllerAnimated:YES completion:nil];
-	photoView.photoImg = [info objectForKey:UIImagePickerControllerEditedImage];
 	//[imageButton setImage:picture forState:UIControlStateNormal];
-    photoView.imgView.image=photoView.photoImg;
+    photoView.imgView.image=[info objectForKey:UIImagePickerControllerEditedImage];
     self.user_pic=photoView.imgView.image;
     //NSLog(@"%@",self.user_pic);
 }

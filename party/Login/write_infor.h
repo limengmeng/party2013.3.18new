@@ -17,10 +17,6 @@
     UIButton *button4; //返回
     
     UILabel *labelName;//填写资料
-    
-    NSString *nick;
-    NSString *age;
-    NSString *sex;
 }
 
 @property (nonatomic,retain) UIButton *button4; //返回
@@ -29,9 +25,5 @@
 @property (nonatomic,retain) UIButton *button1; //男
 @property (nonatomic,retain) UIButton *button2; //女
 @property (nonatomic,retain) UIButton *button3; //确认
-@property (nonatomic,retain) UILabel *labelName;//填写资料
 
-@property (nonatomic,retain) NSString *nick;
-@property (nonatomic,retain) NSString *age;
-@property (nonatomic,retain) NSString *sex;
 @end

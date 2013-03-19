@@ -20,7 +20,6 @@
     UIImageView *imgView;
 }
 
-@property (nonatomic,retain) UILabel *labelName;
 @property (nonatomic,retain) UIImageView *imgView;
 @property (nonatomic,retain) UITextField *field1;//
 @property (nonatomic,retain) UITextField *field2;//

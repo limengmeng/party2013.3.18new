@@ -11,7 +11,6 @@
 @implementation write_done
 @synthesize field1,field2,button1,button2,button3,button4;
 @synthesize imgView;
-@synthesize labelName;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,25 +18,27 @@
     if (self) {
         // Initialization code
         //*****************************标题*************************************
-        labelName=[[[UILabel alloc]initWithFrame:CGRectMake(118, 18, 84, 19)]autorelease];
+        labelName=[[UILabel alloc]initWithFrame:CGRectMake(118, 18, 84, 19)];
         labelName.text=@"填写资料";
         labelName.textColor=[UIColor redColor];
         labelName.font=[UIFont systemFontOfSize:20];
         labelName.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.labelName];
+        [self addSubview:labelName];
+        [labelName release];
         //*****************************标题 end*************************************
         
         //*****************************用户头像*************************************
-        imgView=[[[UIImageView alloc]initWithFrame:CGRectMake(115, 53, 86, 86)]autorelease];
+        imgView=[[UIImageView alloc]initWithFrame:CGRectMake(115, 53, 86, 86)];
         imgView.image=[UIImage imageNamed:@"sina-userphoto@2x.png"];
-        [self addSubview:self.imgView];
+        [self addSubview:imgView];
+        [imgView release];
         
         //*****************************用户头像end*************************************
         
         
         
         //*****************************用户名*************************************
-        field1=[[[UITextField alloc]initWithFrame:CGRectMake(48, 150, 246, 39)]autorelease];
+        field1=[[UITextField alloc]initWithFrame:CGRectMake(48, 150, 246, 39)];
         field1.placeholder=@"用户名";
         field1.font=[UIFont systemFontOfSize:14];
         field1.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -52,11 +53,12 @@
         mailFiled1.background = [UIImage imageNamed:@"import@2x.png"];
         [self addSubview:mailFiled1];
         [mailFiled1 release];
-        [self addSubview:self.field1];
+        [self addSubview:field1];
+        [field1 release];
         //*****************************用户名 end*************************************
         
         //*****************************年龄*************************************
-        field2=[[[UITextField alloc]initWithFrame:CGRectMake(48, 200, 246, 39)]autorelease];
+        field2=[[UITextField alloc]initWithFrame:CGRectMake(48, 200, 246, 39)];
         field2.placeholder=@"年龄";
         //self.field2.userInteractionEnabled=NO;
         field2.font=[UIFont systemFontOfSize:14];
@@ -70,10 +72,9 @@
         mailFiled2.backgroundColor=[UIColor clearColor];
         mailFiled2.userInteractionEnabled=NO;
         mailFiled2.background = [UIImage imageNamed:@"import@2x.png"];
-        [self addSubview:mailFiled2];
-        [self addSubview:self.field2];
-        
-        [self addSubview:self.field2];
+        [self addSubview:mailFiled2];        
+        [self addSubview:field2];
+        [field2 release];
         [mailFiled2 release];
         //*****************************年龄 end*************************************
         
@@ -86,7 +87,7 @@
         button1.tag=102;
         [button1 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         button1.titleLabel.font=[UIFont systemFontOfSize:15];
-        [self addSubview:self.button1];
+        [self addSubview:button1];
         //*****************************男按钮 end*************************************
         
         //*****************************女按钮*************************************
@@ -97,7 +98,7 @@
         [button2 setBackgroundImage:[UIImage imageNamed:@"loginFemaleing.png"] forState:UIControlStateSelected];
         button2.tag=103;
         [button2 addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.button2];
+        [self addSubview:button2];
         //*****************************女按钮 end*************************************
         
         //*****************************确认按钮*************************************
@@ -106,7 +107,7 @@
         button3.backgroundColor=[UIColor clearColor];
         [button3 setBackgroundImage:[UIImage imageNamed:@"loginyes@2x.png"] forState:UIControlStateNormal];
         [button3 setBackgroundImage:[UIImage imageNamed:@"loginyesing.png"] forState:UIControlStateSelected];
-        [self addSubview:self.button3];
+        [self addSubview:button3];
         //*****************************确认按钮 end*************************************
         
         //*****************************返回按钮*************************************
@@ -115,7 +116,7 @@
         self.button4.backgroundColor=[UIColor clearColor];
         [self.button4 setBackgroundImage:[UIImage imageNamed:@"back@2x.png"] forState:UIControlStateNormal];
         [self.button4 setBackgroundImage:[UIImage imageNamed:@"backanxia@2x.png"] forState:UIControlStateSelected];
-        [self addSubview:self.button4];
+        [self addSubview:button4];
         //*****************************返回按钮 end*************************************
     }
     return self;
@@ -143,7 +144,13 @@
 -(void)dealloc
 {
     [super dealloc];
-    
+    [field1 release];
+    [field2 release];
+    [imgView release];
+    [button1 release];
+    [button2 release];
+    [button3 release];
+    [button4 release];
 }
 /*
  // Only override drawRect: if you perform custom drawing.

@@ -13,12 +13,9 @@
     UIImageView *imgView;//图片
     UIButton *button1;
     UIButton *button2;
-    UIImage *photoImg;
 }
 
-@property (nonatomic,retain) UILabel *labelName;//上传照片
 @property (nonatomic,retain) UIImageView *imgView;//图片
 @property (nonatomic,retain) UIButton *button1;
 @property (nonatomic,retain) UIButton *button2;
-@property (nonatomic,retain) UIImage *photoImg;
 @end
